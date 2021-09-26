@@ -1,5 +1,6 @@
 import React, {Component, useState} from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import provider from "../../ethereum/_ethers";
 const {ethers} = require("ethers");
@@ -184,10 +185,10 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
 
                                     {/*Logo*/}
                                     <div id="logo">
-                                        <a href="index.html" className="standard-logo" data-dark-logo="../img/logo.png"><img
+                                        <a href="index.html" className="standard-logo" data-dark-logo="../img/logo.png"><Image
                                             src="../img/logo.png" alt="Spelllbook"/></a>
                                         <a href="index.html" className="retina-logo"
-                                           data-dark-logo="../img/logo.png"><img src="../img/logo.png"
+                                           data-dark-logo="../img/logo.png"><Image src="../img/logo.png"
                                                                                  alt="Spelllbook"/></a>
                                     </div>
                                     {/*#logo end*/}
@@ -284,7 +285,7 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                             {/*Footer Widgets*/}
                             <div className="footer-widgets-wrap center clearfix">
 
-                                <img src="../img/logo.png" width="150" alt="Spelllbook"/>
+                                <Image src="../img/logo.png" width="150" alt="Spelllbook"/>
 
                                 <div className="topmargin-lg clearfix ">
 
