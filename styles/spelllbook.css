@@ -1,0 +1,38 @@
+.form-process-react {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	background-color: transparent;
+}
+
+.form-process-react-before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.7;
+	z-index: -1;
+}
+
+.form-process-react-before-merged {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.7;
+	/*z-index: -1;*/
+	display: block;
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: 0;*/
+	z-index: 3;
+	/*background-color: transparent;*/
+}
