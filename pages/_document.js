@@ -10,7 +10,11 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+          <Head>
+              <link
+                  href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700,800,900|Montserrat:400,700|Abril+Fatface|Yellowtail&display=swap"
+                  rel="stylesheet" type="text/css"/>
+          </Head>
         <body className="stretched dark" style={{touchAction: "pan-y"}}>
           <Main />
           <NextScript />

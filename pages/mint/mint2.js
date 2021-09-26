@@ -141,9 +141,6 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                 <meta name="author" content="Spelllbook"/>
                 <meta name="format-detection" content="telephone=no"/>
 
-                <link
-                    href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700,800,900|Montserrat:400,700|Abril+Fatface|Yellowtail&display=swap"
-                    rel="stylesheet" type="text/css"/>
                 <link rel="stylesheet" type="text/css" href="../MyFontsWebfontsKit.css"/>
                 <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
                 <link rel="stylesheet" href="../style.css" type="text/css"/>
