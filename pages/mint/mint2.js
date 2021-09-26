@@ -8,6 +8,8 @@ import contract from "../../ethereum/_contract";
 import MintForm from '../../components/mintForm';
 import SuccessTransactionForm from '../../components/successTransactionForm'
 
+import logoImage from  '../../public/img/logo.png';
+
 export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkName} ) {
 
     // comment out for now
@@ -163,9 +165,9 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                                     {/*Logo*/}
                                     <div id="logo">
                                         <a href="index.html" className="standard-logo" data-dark-logo="../img/logo.png"><Image
-                                            src="../img/logo.png" alt="Spelllbook"/></a>
+                                            src={logoImage} alt="Spelllbook"/></a>
                                         <a href="index.html" className="retina-logo"
-                                           data-dark-logo="../img/logo.png"><Image src="../img/logo.png"
+                                           data-dark-logo="../img/logo.png"><Image src={logoImage}
                                                                                  alt="Spelllbook"/></a>
                                     </div>
                                     {/*#logo end*/}
@@ -262,7 +264,7 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                             {/*Footer Widgets*/}
                             <div className="footer-widgets-wrap center clearfix">
 
-                                <Image src="../img/logo.png" width="150" alt="Spelllbook"/>
+                                <Image src={logoImage} width="150" alt="Spelllbook"/>
 
                                 <div className="topmargin-lg clearfix ">
 
