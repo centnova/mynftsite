@@ -140,28 +140,8 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                 <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
                 <meta name="author" content="Spelllbook"/>
                 <meta name="format-detection" content="telephone=no"/>
-
-                <link rel="stylesheet" type="text/css" href="../MyFontsWebfontsKit.css"/>
-                <link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
-                <link rel="stylesheet" href="../style.css" type="text/css"/>
-                <link rel="stylesheet" href="../css/dark.css" type="text/css"/>
-                <link href="../fonts/css/all.css" rel="stylesheet"/>
-                <link rel="stylesheet" href="../css/font-icons.css" type="text/css"/>
-                <link rel="stylesheet" href="../css/animate.css" type="text/css"/>
-                <link rel="stylesheet" href="../css/magnific-popup.css" type="text/css"/>
-                <link rel="stylesheet" href="../css/custom.css" type="text/css"/>
                 <meta name="viewport"
                       content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no"/>
-                <link rel="stylesheet" type="text/css" href="../include/rs-plugin/css/settings.css" media="screen"/>
-                <link rel="stylesheet" type="text/css" href="../include/rs-plugin/css/layers.css"/>
-                <link rel="stylesheet" href="/spelll/spelll.css" type="text/css"/>
-                <link rel="stylesheet" href="/spelll/css/fonts.css" type="text/css"/>
-                <link rel="stylesheet" type="text/css"
-                      href="../include/rs-plugin/css/addons/revolution.addon.revealer.css"/>
-                <link rel="stylesheet" type="text/css"
-                      href="../include/rs-plugin/css/addons/revolution.addon.revealer.preloaders.css"/>
-                <link rel="stylesheet" type="text/css"
-                      href="../include/rs-plugin/css/addons/revolution.addon.particles.css"/>
                 <link rel="icon" href="../img/favicon.png"/>
                 <title>Spelllbook Mint</title>
                 <style>
