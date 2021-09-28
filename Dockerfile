@@ -2,12 +2,16 @@ FROM node:14
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
-RUN npm ci --only=production
+RUN npm install --production
 
-COPY . ./
+COPY ./ ./
 
-EXPOSE 8080
+RUN npm run build
 
-CMD [ "node", "index.js" ]
+EXPOSE 3000
+
+USER node
+
+CMD [ "npm", "start" ]
