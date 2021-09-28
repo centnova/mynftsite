@@ -27,7 +27,8 @@ NETWORK ID     NAME      DRIVER    SCOPE
 docker build --network=host -t mynftsite .
 ```
 and the process will finish
-
+However the issue was solved without the need to use the host network by just restarting docker (the docker0 network
+did not have an assigned ip)
 
 ----
 Note: using the `RUN npm ci --only=production" resulted in not finding module 'ethers'
