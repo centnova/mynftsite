@@ -2,6 +2,8 @@ FROM node:14
 
 WORKDIR /app
 
+RUN npm install --global pm2
+
 COPY package*.json ./
 
 RUN npm install --production
@@ -14,4 +16,4 @@ EXPOSE 3000
 
 USER node
 
-CMD [ "npm", "start" ]
+CMD [ "pm2-runtime", "npm", "--", "start" ]
