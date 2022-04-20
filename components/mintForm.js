@@ -6,6 +6,8 @@ export default function MintForm(ctx) {
     let {totalValue, tokens, maxTokenPurchase, tokenPrice, stepUp, stepDown, onSubmit,
                                  totalSupply, maxTokens, loading} = ctx;
 
+    const nftName = 'ConfusedHeroes';
+
     return (
         <form className="row" onSubmit={onSubmit}>
                                             <div className={loading?"form-process-react-before-merged" :"form-process-react"}>
@@ -19,7 +21,7 @@ export default function MintForm(ctx) {
                                                     "color": "#ffffff",
                                                     "letterSpacing": "0px",
                                                     "fontFamily": "Cattedrale-Regular"
-                                                }}>Mint a Spe<span className="spelll">lll</span></div>
+                                                }}>Mint a {nftName}</div>
 
                                                 <span style={{
                                                     "fontSize": "20px",
@@ -27,7 +29,7 @@ export default function MintForm(ctx) {
                                                     "fontWeight": "400",
                                                     "color": "rgba(255,255,255,0.75)",
                                                     "fontFamily": "Montserrat"
-                                                }}><strong>Mint up to {maxTokenPurchase} Spellls at {tokenPrice} ETH each</strong><br/>
+                                                }}><strong>Mint up to {maxTokenPurchase} {nftName} at {tokenPrice} ETH each</strong><br/>
 Minted: {totalSupply}/{maxTokens}</span>
 
 
@@ -56,7 +58,7 @@ Minted: {totalSupply}/{maxTokens}</span>
 
                                                 <button type="submit"
                                                         className="button button-xlarge button-circle button-3d button-light button-border">MINT
-                                                    SPELLLS <span className="spelll"><span
+                                                    {nftName} <span className="nftClass"><span
                                                         id="reward">{totalValue}</span> ETH</span></button>
 
                                             </div>

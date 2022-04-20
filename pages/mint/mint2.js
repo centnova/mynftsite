@@ -10,6 +10,8 @@ import SuccessTransactionForm from '../../components/successTransactionForm'
 
 // import logoImage from  '../../public/img/logo.png';
 
+const nftName = "Confused Heroes";
+
 export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer} ) {
 
     // comment out for now
@@ -152,12 +154,12 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
 
                 {/*	*/}
                 <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
-                <meta name="author" content="Spelllbook"/>
+                <meta name="author" content="{}"/>
                 <meta name="format-detection" content="telephone=no"/>
                 <meta name="viewport"
                       content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no"/>
                 <link rel="icon" href="../img/favicon.png"/>
-                <title>Spelllbook Mint</title>
+                <title>{nftName} Mint</title>
                 <style>
                 </style>
 
@@ -177,24 +179,24 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                                     {/*Logo*/}
                                     <div id="logo">
                                         <a href="index.html" className="standard-logo" data-dark-logo="../img/logo.png"><Image
-                                            src={logoImage} alt="Spelllbook"/></a>
+                                            src={logoImage} alt={nftName}/></a>
                                         <a href="index.html" className="retina-logo"
                                            data-dark-logo="../img/logo.png"><Image src={logoImage}
-                                                                                 alt="Spelllbook"/></a>
+                                                                                 alt={nftName}/></a>
                                     </div>
                                     {/*#logo end*/}
                                     <div className="header-misc">
                                         <a href="#" className="inline-block " style={{"paddingRight": "6px"}}>
-                                            <i className="fab fa-twitter fa-lg spelll"></i>
+                                            <i className="fab fa-twitter fa-lg"></i>
 
                                         </a> <i className="inline-block"> </i>
 
                                         <a href="#" className="inline-block " style={{"paddingRight": "5px"}}>
-                                            <i className="fab fa-discord fa-lg spelll"></i>
+                                            <i className="fab fa-discord fa-lg"></i>
 
                                         </a>
                                         <a href="#" className="button button-border rounded-pill "><span
-                                            className="spelll" onClick={connectWallet}>{account ? account: "CONNECT WALLET"}</span></a>
+                                            onClick={connectWallet}>{account ? account: "CONNECT WALLET"}</span></a>
 
 
                                     </div>
@@ -276,7 +278,7 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                             {/*Footer Widgets*/}
                             <div className="footer-widgets-wrap center clearfix">
 
-                                <Image src={logoImage} width="150" alt="Spelllbook"/>
+                                <Image src={logoImage} width="150" alt={nftName}/>
 
                                 <div className="topmargin-lg clearfix ">
 
@@ -294,7 +296,7 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                                 </div>
 
                                 <div className="text-uppercase ls3"
-                                     style={{"color": "#333", "marginTop": "10px"}}>&copy; Spelllbook 2021. All Rights
+                                     style={{"color": "#333", "marginTop": "10px"}}>&copy; {nftName} 2021. All Rights
                                     Reserved.
                                 </div>
 

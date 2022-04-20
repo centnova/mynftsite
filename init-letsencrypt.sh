@@ -5,10 +5,15 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(mint.spelllbook.com nft.spelllbook.com token.spelllbook.com)
+DOMAIN1="mint.confusedheroes.com"
+DOMAIN2="nft.confusedheroes.com"
+DOMAIN3="token.confusedheroes.com"
+DEV_EMAIL="dev@confusedheroes.com"
+
+domains=("$DOMAIN1" "$DOMAIN2" "$DOMAIN3")
 rsa_key_size=4096
 data_path="./data/certbot"
-email="dev@spelllbook.com" # Adding a valid address is strongly recommended
+email="$DEV_EMAIL" # Adding a valid address is strongly recommended
 staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if [ -d "$data_path" ]; then
