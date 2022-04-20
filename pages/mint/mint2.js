@@ -7,12 +7,13 @@ const {ethers} = require("ethers");
 import contract from "../../ethereum/_contract";
 import MintForm from '../../components/mintForm';
 import SuccessTransactionForm from '../../components/successTransactionForm'
+import useWhitelist from "../../lib/useWhitelist";
 
 // import logoImage from  '../../public/img/logo.png';
 
 const nftName = "Confused Heroes";
 
-export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer} ) {
+const Mint = ( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer} ) => {
 
     // comment out for now
     const calcTotalValue = (_tokens, _tokenPrice) => {
@@ -142,17 +143,6 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
     return (
         <div>
             <Head>
-                {/*            */}
-                {/*	*/}
-                {/* oooooooo8                         o888  o888  o888  oooo                               oooo        */}
-                {/*888        ooooooooo    ooooooooo8  888   888   888   888ooooo     ooooooo     ooooooo   888  ooooo */}
-                {/* 888oooooo  888    888 888oooooo8   888   888   888   888    888 888     888 888     888 888o888    */}
-                {/*        888 888    888 888          888   888   888   888    888 888     888 888     888 8888 88o   */}
-                {/*o88oooo888  888ooo88     88oooo888 o888o o888o o888o o888ooo88     88ooo88     88ooo88  o888o o888o */}
-                {/*           o888                                                                                     */}
-
-
-                {/*	*/}
                 <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
                 <meta name="author" content="{}"/>
                 <meta name="format-detection" content="telephone=no"/>
@@ -320,6 +310,8 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
 
 Mint.getInitialProps = async (ctx) => {
 
+    const ipData = useWhitelist(ctx.req, ctx.res)
+
     let maxTokens = await contract.MAX_TOKENS();
     let tokenPrice = await contract.tokenPrice();
     let maxTokenPurchase = await contract.maxTokenPurchase();
@@ -331,5 +323,7 @@ Mint.getInitialProps = async (ctx) => {
     tokenPrice = parseFloat(ethers.utils.formatEther(tokenPrice));
     const network = await providerServer.getNetwork()
     const networkNameServer = network.name;
-    return {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer}
+    return {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer, ipData}
 }
+
+export default Mint
