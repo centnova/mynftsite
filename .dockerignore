@@ -5,4 +5,6 @@ Dockerfile
 docker-compose.yml
 node_modules/
 .next/
-
+init-letsencrypt.sh
+README.md
+data/
