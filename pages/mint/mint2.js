@@ -2,18 +2,17 @@ import React, {Component, useState} from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import provider from "../../ethereum/_ethers";
+import providerServer from "../../ethereum/_ethersServer";
 const {ethers} = require("ethers");
 import contract from "../../ethereum/_contract";
 import MintForm from '../../components/mintForm';
 import SuccessTransactionForm from '../../components/successTransactionForm'
 
-import logoImage from  '../../public/img/logo.png';
+// import logoImage from  '../../public/img/logo.png';
 
-export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkName} ) {
+export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer} ) {
 
     // comment out for now
-    // let provider;
     const calcTotalValue = (_tokens, _tokenPrice) => {
         let _totalValue = _tokens * _tokenPrice;
         _totalValue = (Math.round(_totalValue * 100) / 100).toFixed(2)
@@ -27,6 +26,9 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
     const [successMessage, setSuccessMessage] = useState(false);
     const [etherscanLink, setEtherscanLink] = useState('');
     const [account, setAccount] = useState('');
+    const [networkName, setNetworkName] = useState('');
+    const [provider, setProvider] = useState(false);
+    const [connectMessage, setConnectMessage] = useState('');
 
     const router = useRouter();
 
@@ -72,7 +74,12 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
                 "function symbol() view returns (string)"
             ];
 
-
+            if (!provider) {
+                console.log(provider);
+                console.log("You have not connected to a provider")
+                setLoading(false);
+                return;
+            }
             const accounts = await provider.getSigner();
             console.log(contract);
             const symbol = await contract.symbol();
@@ -97,7 +104,7 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
             console.log(`Minted ${tokens} for a total of ${totalValue}`);
             const receipt = await transaction.wait();
             console.log(receipt)
-            const _contractUrl = 'https://' + networkName + ".etherscan.io/tx/"+receipt['transactionHash'];
+            const _contractUrl = 'https://' + networkNameServer + ".etherscan.io/tx/"+receipt['transactionHash'];
             setEtherscanLink(_contractUrl);
             setSuccessMessage(true);
         } catch (err) {
@@ -111,13 +118,18 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
     const connectWallet = async (e) => {
         console.log("Connecting wallet");
         console.log(provider);
-        // window.ethereum.request({method: 'eth_requestAccounts'});
-        // provider = await (new ethers.providers.Web3Provider(window.ethereum));
-        const provider = new ethers.Web3Provider(ethers.web3.currentProvider);
-        await provider.send('eth_requestAccounts', []);
+        window.ethereum.request({method: 'eth_requestAccounts'});
+        const provider = await new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(provider);
+        // provider = new ethers.Web3Provider(ethers.web3.currentProvider);
+        // await provider.send('eth_requestAccounts', []);
         const signer = await provider.getSigner(0);
         console.log(signer);
-
+        const _address = await signer.getAddress();
+        console.log(_address);
+        setAccount(_address);
+        setNetworkName(await provider.getNetwork());
+        console.log(networkName);
         // if (signer === undefined) setAccount(signer.)
         console.log(provider);
     }
@@ -182,7 +194,7 @@ export default function Mint( {maxTokens, tokenPrice, maxTokenPurchase, totalSup
 
                                         </a>
                                         <a href="#" className="button button-border rounded-pill "><span
-                                            className="spelll" onClick={connectWallet}>CONNECT WALLET</span></a>
+                                            className="spelll" onClick={connectWallet}>{account ? account: "CONNECT WALLET"}</span></a>
 
 
                                     </div>
@@ -315,7 +327,7 @@ Mint.getInitialProps = async (ctx) => {
     // tokenPrice = 0.04;
     maxTokens = maxTokens.toNumber();
     tokenPrice = parseFloat(ethers.utils.formatEther(tokenPrice));
-    const network = await provider.getNetwork()
-    const networkName = network.name;
-    return {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkName}
+    const network = await providerServer.getNetwork()
+    const networkNameServer = network.name;
+    return {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNameServer}
 }
