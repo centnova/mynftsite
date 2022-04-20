@@ -5,14 +5,16 @@ import Card from '../../components/card';
 import ButtonForm from "../../components/buttonForm";
 import InputForm from "../../components/inputForm";
 
+import useWhitelist from "../../lib/useWhitelist";
+
 import provider from '../../ethereum/_ethers'
 const {ethers} = require("ethers");
 import contract from '../../ethereum/_contract';
 
 // todo events to check for balance changes?
 
-function Admin({ saleIsActive, balance, tokenPrice, maxTokenPurchase, baseUri, tokenProvenance, startingIndexBlock,
-                   startingIndex, revealTimestamp }) {
+const Admin = ({ saleIsActive, balance, tokenPrice, maxTokenPurchase, baseUri, tokenProvenance, startingIndexBlock,
+                   startingIndex, revealTimestamp }) => {
     const maxTokens = 100;
     const [loading, setLoading] = useState(false);
     const [contractUrl, setContractUrl] = useState("")
@@ -295,6 +297,9 @@ function Admin({ saleIsActive, balance, tokenPrice, maxTokenPurchase, baseUri, t
 }
 
 Admin.getInitialProps = async (ctx) => {
+
+    const ipData = useWhitelist(ctx.req, ctx.res)
+
     console.log('=================')
     console.log(provider);
     console.log('=================')
@@ -360,7 +365,7 @@ Admin.getInitialProps = async (ctx) => {
     // emergencySetStartingIndexBlock
 
     return { saleIsActive, balance, tokenPrice, maxTokenPurchase, baseUri, tokenProvenance, startingIndexBlock,
-    startingIndex, revealTimestamp};
+    startingIndex, revealTimestamp, ipData};
 }
 
 

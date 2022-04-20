@@ -5,10 +5,12 @@ import React, {Component} from 'react';
 import {useState} from 'react';
 import provider from '../../ethereum/_ethers'
 
+import useWhitelist from '../../lib/useWhitelist'
+
 const {ethers} = require("ethers");
 import contract from '../../ethereum/_contract';
 
-export default function Mint() {
+const Mint = props => {
 
     const [tokens, setTokens] = useState(1);
     const [totalValue, setTotalValue] = useState(0.05);
@@ -80,3 +82,10 @@ export default function Mint() {
         </div>
     );
 }
+
+Mint.getInitialProps = async({req, res}) => {
+    const ipData = useWhitelist(req, res)
+    return ipData
+}
+
+export default Mint
