@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 const title = "Confused Heroes";
 const description = "Confused Heroes Site"
 
-export default function Home() {
+const Home = props => {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,3 +24,10 @@ export default function Home() {
     </div>
   )
 }
+
+Home.getInitialProps = async ({ req, res }) => {
+  res.statusCode = 403
+  res.end(`Not allowed`)
+}
+
+export default Home
