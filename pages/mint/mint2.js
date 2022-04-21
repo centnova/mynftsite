@@ -9,7 +9,7 @@ import MintForm from '../../components/mintForm';
 import SuccessTransactionForm from '../../components/successTransactionForm'
 import useWhitelist from "../../lib/useWhitelist";
 
-// import logoImage from  '../../public/img/logo.png';
+import logoImage from  '../../public/img/chlogo.png';
 
 const nftName = "Confused Heroes";
 
@@ -121,7 +121,7 @@ const Mint = ( {maxTokens, tokenPrice, maxTokenPurchase, totalSupply, networkNam
     const connectWallet = async (e) => {
         console.log("Connecting wallet");
         console.log(provider);
-        window.ethereum.request({method: 'eth_requestAccounts'});
+        await window.ethereum.request({method: 'eth_requestAccounts'});
         const provider = await new ethers.providers.Web3Provider(window.ethereum);
         setProvider(provider);
         // provider = new ethers.Web3Provider(ethers.web3.currentProvider);
