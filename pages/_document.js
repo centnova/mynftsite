@@ -11,6 +11,7 @@ class MyDocument extends Document {
     return (
       <Html>
           <Head>
+              <title>MINT CONFUSED HEROES</title>
               <link rel="shortcut icon" href="/favicon.png" />
           </Head>
         <body>
