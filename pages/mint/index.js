@@ -1,6 +1,8 @@
+import styles from '../../styles/minting.module.css'
+
 const Mint = props => {
     return(
-        <div className="main">
+        <div className={styles.main}>
             <img src="logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
                 <div className="heads">MINT CONFUSED HEROES <br/></div>
                 <br/>

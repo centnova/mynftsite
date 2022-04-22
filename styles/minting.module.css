@@ -1,0 +1,194 @@
+@charset "UTF-8";
+/*
+
+MINT CONFUSED HEROES
+
+*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,400,500,600,700,800|Nunito:300,400,600,700,800");
+@font-face {
+font-family: "MonumentExtended-Heavy";
+src: url("fonts/MonumentExtended-Heavy.eot");
+src: url("fonts/MonumentExtended-Heavy.woff") format("woff"),
+url("fonts/MonumentExtended-Heavy.otf") format("opentype");
+
+}
+
+
+/*  Content & Layout */
+/* ----------------------------------------------------------------
+    BODY
+-----------------------------------------------------------------*/
+
+.html {
+  background: url(bgmint2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+
+.main {
+width: 100%;
+margin: auto;
+max-width: 640px;
+text-align: center;
+}
+
+.mintme {
+    width: 320px;
+    height: 60px;
+    border: none;
+    outline: none;
+    color: #fff;
+   background: linear-gradient(90deg, rgba(133,0,188,1) 0%, rgba(217,77,182,1) 100%);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    	border-radius: 35px 35px 35px 35px;
+	font-family: "MonumentExtended-Heavy";
+	font-size: 24px;
+
+
+
+}
+
+
+.mintme:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+   border-radius: 35px 35px 35px 35px;
+}
+
+.mintme:active {
+    color: #fff
+}
+
+.mintme:active:after {
+    background: transparent;
+}
+
+.mintme:hover:before {
+    opacity: 1;
+}
+
+.mintme:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  background: linear-gradient(90deg, rgba(133,0,188,1) 0%, rgba(217,77,182,1) 100%);
+    left: 0;
+    top: 0;
+  border-radius: 35px 35px 35px 35px;
+}
+
+/* */
+/* ----------------*/
+
+.heads {
+	box-sizing: border-box;
+
+
+
+font-family: "MonumentExtended-Heavy";
+
+
+
+	color:#fff;
+	text-align:center;
+	text-decoration:none;
+	background-color: rgba(0,0,0,0.0);
+	font-size:28px;
+	font-weight:bold;
+
+}
+
+.under {
+	box-sizing: border-box;
+
+font-family: "MonumentExtended-Heavy";
+
+	color:#fff;
+	text-align:center;
+	text-decoration:none;
+	background-color: rgba(0,0,0,0.0);
+	font-size:16px;
+
+
+}
+
+.mintnum {
+	box-sizing: border-box;
+
+	width:140px;
+	height:60px;
+font-family: "MonumentExtended-Heavy";
+
+	border: 6px solid #fff;
+
+	color:#f5f5f5;
+	text-align:center;
+	text-decoration:none;
+	background-color: rgba(0,0,0,0.0);
+	font-size:26px;
+	font-weight:bold;
+	transition: all 0.3s ease;
+}
+
+
+.round-button {
+	box-sizing: border-box;
+
+	width:60px;
+	height:60px;
+font-family: "MonumentExtended-Heavy";
+
+	border: 6px solid #fff;
+	border-radius: 50%;
+	color:#f5f5f5;
+	text-align:center;
+	text-decoration:none;
+	background-color: rgba(0,0,0,0.0);
+	font-size:26px;
+	font-weight:bold;
+	transition: all 0.3s ease;
+}
+.round-button:hover {
+	background-color: rgba(0,0,0,0.1);
+	box-shadow: 0px 0px 10px rgba(255,255,100,1);
+	text-shadow: 0px 0px 10px rgba(255,255,100,1);
+}
+
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+
+
+
+
+
