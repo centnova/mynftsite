@@ -1,4 +1,5 @@
 import styles from '../../styles/minting.module.css'
+import useWhitelist from "../../lib/useWhitelist";
 
 const Mint = props => {
     return(
@@ -46,6 +47,11 @@ const Mint = props => {
 
         </div>
     )
+}
+
+Mint.getInitialProps = async({req, res}) => {
+    const ipData = useWhitelist(req, res)
+    return ipData
 }
 
 export default Mint
