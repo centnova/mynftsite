@@ -4,30 +4,30 @@ const Mint = props => {
     return(
         <div className={styles.main}>
             <img src="logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
-                <div className="heads">MINT CONFUSED HEROES <br/></div>
+                <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
                 <br/>
-                    <div className="under"></div>
+                    <div className={styles.under}></div>
                     <br/>
 
-                        <div className="number">
-                            <button className="round-button">-</button>
-                            <input type="text" className="mintnum" value="20"/>
-                            <button className="round-button">+</button>
+                        <div className={styles.number}>
+                            <button className={styles.roundButton}>-</button>
+                            <input type="text" className={styles.mintnum} value="20"/>
+                            <button className={styles.roundButton}>+</button>
                         </div>
                         <br/><br/>
-                            <div className="under" style={{fontSize: "22px"}}>127/10000</div>
+                            <div className={styles.under} style={{fontSize: "22px"}}>127/10000</div>
                             <br/>
                                 <br/>
 
-                                    <button className="mintme" type="button">MINT</button>
+                                    <button className={styles.mintme} type="button">MINT</button>
 
                                     <br/><br/>
                                         <br/>
-                                            <div className="under">Cost 0.07 ETH per unit <br/>+ gas fees</div>
+                                            <div className={styles.under}>Cost 0.07 ETH per unit <br/>+ gas fees</div>
                                             <br/>
 
                                                 <br/><br/><br/><br/>
-                                                    <div className="under"
+                                                    <div className={styles.under}
                                                          style={{fontSize: "14px", fontFamily: "Poppins"}}>Please make sure
                                                         you are connected to the right network (Ethereum Mainnet) and
                                                         the correct address. Please note: Once you make the purchase,
