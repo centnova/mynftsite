@@ -3,6 +3,15 @@ import styles from '../../styles/minting.module.css'
 const Mint = props => {
     return(
         <div className={styles.main}>
+            <style jsx global>{`
+        html {
+  background: url(img/bgmint2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+      `}</style>
             <img src="logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
                 <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
                 <br/>
