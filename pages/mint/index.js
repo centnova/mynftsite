@@ -12,7 +12,7 @@ const Mint = props => {
   background-size: cover;
 }
       `}</style>
-            <img src="logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
+            <img src="img/logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
                 <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
                 <br/>
                     <div className={styles.under}></div>
