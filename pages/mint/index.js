@@ -9,12 +9,14 @@ const Mint = props => {
     const [loading, setLoading] = useState(false);
 
 
-    const whitelistMint = true;
+    const whitelistMint = false;
 
     let maxTokens = 8;
+    let saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} PER TRANSACTION`;
 
     if (whitelistMint) {
         maxTokens = 4;
+        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens}.`;
     }
 
     const decreaseTokens = async (event) => {
@@ -62,7 +64,8 @@ const Mint = props => {
                 <br/>
                     <div className={styles.under}></div>
                     <br/>
-
+                    <div className={styles.under}>{saleMessage}</div>
+            <br/><br/>
                         <div className={styles.number}>
                             <button className={styles.roundButton} onClick={decreaseTokens}>-</button>
                             <input type="text" className={styles.mintnum} value={tokens}/>
