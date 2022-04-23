@@ -9,6 +9,42 @@ const Mint = props => {
     const [loading, setLoading] = useState(false);
 
 
+    const whitelistMint = true;
+
+    let maxTokens = 8;
+
+    if (whitelistMint) {
+        maxTokens = 4;
+    }
+
+    const decreaseTokens = async (event) => {
+        let _tokens = tokens;
+
+        if (_tokens <= 1) {
+            setTokens(1);
+            return;
+        }
+
+        _tokens -= 1;
+        setTokens(_tokens);
+        console.log("Decrease tokens: " + _tokens);
+    }
+
+    const increaseTokens = async (event) => {
+        let _tokens = tokens;
+
+        if (_tokens >= maxTokens) {
+            _tokens = maxTokens;
+            setTokens(_tokens);
+            return;
+        }
+
+        _tokens += 1;
+        console.log("Increase tokens: " + _tokens);
+
+        setTokens(_tokens);
+
+    }
 
     return(
         <div className={styles.main}>
@@ -28,9 +64,9 @@ const Mint = props => {
                     <br/>
 
                         <div className={styles.number}>
-                            <button className={styles.roundButton}>-</button>
+                            <button className={styles.roundButton} onClick={decreaseTokens}>-</button>
                             <input type="text" className={styles.mintnum} value={tokens}/>
-                            <button className={styles.roundButton}>+</button>
+                            <button className={styles.roundButton} onClick={increaseTokens}>+</button>
                         </div>
                         <br/><br/>
                             <div className={styles.under} style={{fontSize: "22px"}}>127/10000</div>
