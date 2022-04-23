@@ -1,7 +1,15 @@
 import styles from '../../styles/minting.module.css'
 import useWhitelist from "../../lib/useWhitelist";
+import {useState} from "react";
 
 const Mint = props => {
+    const [tokens, setTokens] = useState(1);
+    const [totalValue, setTotalValue] = useState(0.07);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+
+
+
     return(
         <div className={styles.main}>
             <style jsx global>{`
@@ -21,7 +29,7 @@ const Mint = props => {
 
                         <div className={styles.number}>
                             <button className={styles.roundButton}>-</button>
-                            <input type="text" className={styles.mintnum} value="20"/>
+                            <input type="text" className={styles.mintnum} value={tokens}/>
                             <button className={styles.roundButton}>+</button>
                         </div>
                         <br/><br/>
