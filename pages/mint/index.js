@@ -2,23 +2,33 @@ import styles from '../../styles/minting.module.css'
 import useWhitelist from "../../lib/useWhitelist";
 import {useState} from "react";
 import provider from "../../ethereum/_ethers";
-// import contract from "../../ethereum/_contract";
+import contract from "../../ethereum/_contract";
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
     const [totalValue, setTotalValue] = useState(0.07);
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    //
+    var util = require("util");
+    console.log("Props: " + util.inspect(props, {showHidden: false, depth: null}));
 
-
-    const whitelistMint = false;
+    // const whitelistMint = false;
 
     let maxTokens = 8;
-    let saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} PER TRANSACTION`;
+    let saleMessage = 'MINT IS NOT OPEN';
 
-    if (whitelistMint) {
-        maxTokens = 4;
-        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens}.`;
+    if (!props.saleIsActive) {
+        saleMessage = `MINT IS NOT OPEN`;
+
+    }
+    // else if (whitelistMint) {
+    //     maxTokens = 4;
+    //     saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens}.`;
+    // }
+    else {
+        let maxTokens = 8;
+        saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} PER TRANSACTION`;
     }
 
     const decreaseTokens = async (event) => {
@@ -143,15 +153,17 @@ const Mint = props => {
     )
 }
 
-Mint.getInitialProps = async({req, res}) => {
+export const getServerSideProps = async({req, res}) => {
+    console.log("Inside Server Props");
     const ipData = useWhitelist(req, res)
 
+    let saleIsActive = await contract.saleIsActive();
+    // let saleIsActive = true;
+    console.log(`Sale is active (serverprops): saleIsActive`);
 
-
-
-
-
-    return ipData
+    let r = {props: {saleIsActive}};
+    console.log("Exiting Server Props");
+    return r;
 }
 
 export default Mint
