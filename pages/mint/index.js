@@ -3,6 +3,7 @@ import useWhitelist from "../../lib/useWhitelist";
 import {useState} from "react";
 import provider from "../../ethereum/_ethers";
 import contract from "../../ethereum/_contract";
+import {ethers} from "ethers";
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
@@ -71,29 +72,24 @@ const Mint = props => {
     try {
 
         const accounts = await provider.getSigner();
-        // console.log(contract);
-        // const symbol = await contract.symbol();
-        // const maxMyNFTTokens = await contract.MAX_TOKENS();
-        // console.log(accounts);
-        // console.log(symbol);
-        // console.log(maxMyNFTTokens);
-        //
-        // let saleIsActive = await contract.saleIsActive();
-        //
-        // const signer = provider.getSigner();
-        // const sendWithSigner = contract.connect(signer);
-        //
-        // if (!saleIsActive) {
-        //     console.log("Flipping sale state");
-        //     await sendWithSigner.flipSaleState();
-        // } else {
-        //     console.log("Sale is active");
-        // }
-        //
-        // const weiValue = ethers.utils.parseEther(totalValue.toString());
-        // console.log(weiValue);
-        // await sendWithSigner.mintToken(tokens, {value: weiValue});
-        // console.log(`Minted ${tokens} for a total of ${totalValue}`);
+        console.log(contract);
+        console.log("Accounts" + accounts);
+
+        // recheck if saleIsActive, just in case something changed
+        // todo add here also the whitelist case
+        let saleIsActive = await contract.saleIsActive();
+        if (!saleIsActive) {
+            console.log("The sale is not active, we will not send a transaction")
+            return
+        }
+
+        const sendWithSigner = contract.connect(accounts);
+
+        const weiValue = ethers.utils.parseEther(totalValue.toString());
+        console.log(weiValue);
+
+        await sendWithSigner.mintToken(tokens, {value: weiValue});
+        console.log(`Minted ${tokens} for a total of ${totalValue}`);
 
         // Router.pushRoute('/');
     } catch (err) {
@@ -133,7 +129,7 @@ const Mint = props => {
                             <br/>
                                 <br/>
 
-                                    <button className={styles.mintme} type="button">MINT</button>
+                                    <button className={styles.mintme} type="button" onClick={onSubmit}>MINT</button>
 
                                     <br/><br/>
                                         <br/>
