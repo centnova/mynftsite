@@ -1,6 +1,8 @@
 import styles from '../../styles/minting.module.css'
 import useWhitelist from "../../lib/useWhitelist";
 import {useState} from "react";
+import provider from "../../ethereum/_ethers";
+// import contract from "../../ethereum/_contract";
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
@@ -50,8 +52,46 @@ const Mint = props => {
         setTotalValue(_totalValue);
         setTokens(_tokens);
         console.log("Increase tokens: " + _tokens + " Total Value: " + _totalValue);
-
     }
+
+    const onSubmit = async (event) => {
+    setErrorMessage('');
+    event.preventDefault();
+    setLoading(true);
+    try {
+
+        const accounts = await provider.getSigner();
+        // console.log(contract);
+        // const symbol = await contract.symbol();
+        // const maxMyNFTTokens = await contract.MAX_TOKENS();
+        // console.log(accounts);
+        // console.log(symbol);
+        // console.log(maxMyNFTTokens);
+        //
+        // let saleIsActive = await contract.saleIsActive();
+        //
+        // const signer = provider.getSigner();
+        // const sendWithSigner = contract.connect(signer);
+        //
+        // if (!saleIsActive) {
+        //     console.log("Flipping sale state");
+        //     await sendWithSigner.flipSaleState();
+        // } else {
+        //     console.log("Sale is active");
+        // }
+        //
+        // const weiValue = ethers.utils.parseEther(totalValue.toString());
+        // console.log(weiValue);
+        // await sendWithSigner.mintToken(tokens, {value: weiValue});
+        // console.log(`Minted ${tokens} for a total of ${totalValue}`);
+
+        // Router.pushRoute('/');
+    } catch (err) {
+        setErrorMessage(err.message);
+        console.log(err.message);
+    }
+    setLoading(false);
+};
 
     return(
         <div className={styles.main}>
@@ -73,7 +113,7 @@ const Mint = props => {
             <br/><br/>
                         <div className={styles.number}>
                             <button className={styles.roundButton} onClick={decreaseTokens}>-</button>
-                            <input type="text" className={styles.mintnum} value={tokens}/>
+                            <input type="text" className={styles.mintnum} readOnly value={tokens}/>
                             <button className={styles.roundButton} onClick={increaseTokens}>+</button>
                         </div>
             <br/><br/>
@@ -105,6 +145,12 @@ const Mint = props => {
 
 Mint.getInitialProps = async({req, res}) => {
     const ipData = useWhitelist(req, res)
+
+
+
+
+
+
     return ipData
 }
 
