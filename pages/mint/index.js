@@ -22,29 +22,34 @@ const Mint = props => {
     const decreaseTokens = async (event) => {
         let _tokens = tokens;
 
+        _tokens -= 1;
+
         if (_tokens <= 1) {
-            setTokens(1);
-            return;
+            _tokens = 1;
         }
 
-        _tokens -= 1;
+        let _totalValue = _tokens * 0.07;
+        _totalValue = (Math.round(_totalValue * 100) / 100).toFixed(2)
+
+        setTotalValue(_totalValue);
         setTokens(_tokens);
-        console.log("Decrease tokens: " + _tokens);
+        console.log("Decrease tokens: " + _tokens + " Total Value: " + _totalValue);
     }
 
     const increaseTokens = async (event) => {
         let _tokens = tokens;
+        _tokens += 1;
 
         if (_tokens >= maxTokens) {
             _tokens = maxTokens;
-            setTokens(_tokens);
-            return;
         }
 
-        _tokens += 1;
-        console.log("Increase tokens: " + _tokens);
+        let _totalValue = _tokens * 0.07;
+        _totalValue = (Math.round(_totalValue * 100) / 100).toFixed(2)
 
+        setTotalValue(_totalValue);
         setTokens(_tokens);
+        console.log("Increase tokens: " + _tokens + " Total Value: " + _totalValue);
 
     }
 
