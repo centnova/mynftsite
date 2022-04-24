@@ -76,6 +76,8 @@ const Mint = props => {
                             <input type="text" className={styles.mintnum} value={tokens}/>
                             <button className={styles.roundButton} onClick={increaseTokens}>+</button>
                         </div>
+            <br/><br/>
+                  <div className={styles.under} style={{fontSize: "22px"}}>{totalValue} ETH</div>
                         <br/><br/>
                             <div className={styles.under} style={{fontSize: "22px"}}>127/10000</div>
                             <br/>
