@@ -129,7 +129,7 @@ const Mint = props => {
             <br/><br/>
                   <div className={styles.under} style={{fontSize: "22px"}}>{totalValue} ETH</div>
                         <br/><br/>
-                            <div className={styles.under} style={{fontSize: "22px"}}>127/10000</div>
+                            <div className={styles.under} style={{fontSize: "22px"}}>{props.totalSupply}/{props.maxSupply}</div>
                             <br/>
                                 <br/>
 
@@ -158,10 +158,16 @@ export const getServerSideProps = async({req, res}) => {
     const ipData = useWhitelist(req, res)
 
     let saleIsActive = await contract.saleIsActive();
-    // let saleIsActive = true;
-    console.log(`Sale is active (serverprops): saleIsActive`);
+    let totalSupply = await contract.totalSupply();
+    let maxSupply = await contract.MAX_TOKENS();
 
-    let r = {props: {saleIsActive}};
+    totalSupply = totalSupply.toNumber();
+    maxSupply = maxSupply.toNumber();
+    // let saleIsActive = true;
+    console.log(`Sale is active (serverprops): ${saleIsActive} totalSupply: ${totalSupply} maxSupply: ${maxSupply}`);
+
+    let r = {props: {saleIsActive, totalSupply, maxSupply}};
+    console.log(r);
     console.log("Exiting Server Props");
     return r;
 }
