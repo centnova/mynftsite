@@ -16,20 +16,19 @@ const Mint = props => {
 
     // const whitelistMint = false;
 
-    let maxTokens = 8;
+    let maxTokens = 1;
     let saleMessage = 'MINT IS NOT OPEN';
 
-    if (!props.saleIsActive) {
-        saleMessage = `MINT IS NOT OPEN`;
-
+    if (props.wlSaleIsActive) {
+        maxTokens = 4;
+        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens}.`;
     }
-    // else if (whitelistMint) {
-    //     maxTokens = 4;
-    //     saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens}.`;
-    // }
-    else {
-        let maxTokens = 8;
+    else if (props.saleIsActive) {
+        maxTokens = 8;
         saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} PER TRANSACTION`;
+    }
+    else {
+        saleMessage = `MINT IS NOT OPEN`;
     }
 
     const decreaseTokens = async (event) => {
@@ -156,13 +155,14 @@ export const getServerSideProps = async({req, res}) => {
     let saleIsActive = await contract.saleIsActive();
     let totalSupply = await contract.totalSupply();
     let maxSupply = await contract.MAX_TOKENS();
+    let wlSaleIsActive = await contract.wlSaleIsActive();
 
     totalSupply = totalSupply.toNumber();
     maxSupply = maxSupply.toNumber();
     // let saleIsActive = true;
     console.log(`Sale is active (serverprops): ${saleIsActive} totalSupply: ${totalSupply} maxSupply: ${maxSupply}`);
 
-    let r = {props: {saleIsActive, totalSupply, maxSupply}};
+    let r = {props: {saleIsActive, wlSaleIsActive, totalSupply, maxSupply}};
     console.log(r);
     console.log("Exiting Server Props");
     return r;
