@@ -15,6 +15,10 @@ const Mint = props => {
     const [successMessage, setSuccessMessage] = useState(false);
     const [etherscanLink, setEtherscanLink] = useState(false);
     const [connected, setConnected] = useState(false);
+    const [provider, setProvider] = useState(null);
+    const [account, setAccount] = useState('');
+    const [chainName, setChainName] = useState('');
+
     //
     var util = require("util");
     console.log("Props: " + util.inspect(props, {showHidden: false, depth: null}));
@@ -71,6 +75,7 @@ const Mint = props => {
         setErrorMessage('');
         event.preventDefault();
         setLoading(true);
+        console.log("=================================== 1 ====================================");
         try {
 
             const accounts = await provider.getSigner();
@@ -78,7 +83,7 @@ const Mint = props => {
 
             console.log(contract);
 
-
+console.log("=================================== 2 ====================================");
             // recheck if saleIsActive, just in case something changed
             // todo add here also the whitelist case
             let saleIsActive = await contract.saleIsActive();
@@ -90,7 +95,7 @@ const Mint = props => {
             let mintedWith = "";
 
             let transaction;
-
+console.log("=================================== 3 ====================================");
             if (wlSaleIsActive) {
                 let proofs = [];
                 let waladdress = await accounts.getAddress();
@@ -108,7 +113,7 @@ const Mint = props => {
                     return
                 }
 
-
+console.log("=================================== 4 ====================================");
                 transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
                 mintedWith = "Whitelist";
             } else if (saleIsActive) {
@@ -124,7 +129,7 @@ const Mint = props => {
             console.log(receipt)
             const _contractUrl = 'https://' + "rinkeby.etherscan.io/tx/"+receipt['transactionHash'];
             setEtherscanLink(_contractUrl);
-
+console.log("=================================== 5 ====================================");
             console.log(weiValue);
             console.log(`Minted ${tokens} with ${mintedWith} for a total of ${totalValue}`);
 
@@ -141,6 +146,26 @@ const Mint = props => {
         setErrorMessage('');
         event.preventDefault();
         setLoading(true);
+
+        await window.ethereum.request({method: 'eth_requestAccounts'});
+        const provider = await new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(provider);
+
+        // provider = new ethers.Web3Provider(ethers.web3.currentProvider);
+        // await provider.send('eth_requestAccounts', []);
+
+        const signer = await provider.getSigner(0);
+        console.log(signer);
+        const _address = await signer.getAddress();
+        console.log("After connect the wallet address is: " + _address);
+        setAccount(_address);
+        setChainName(await provider.getNetwork());
+        console.log("After connect the chainName is: " + chainName);
+        // if (signer === undefined) setAccount(signer.)
+        console.log(provider);
+
+        setConnected(true);
+
         try {
             console.log("Connect wallet");
         }
