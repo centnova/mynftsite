@@ -14,6 +14,7 @@ const Mint = props => {
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
     const [etherscanLink, setEtherscanLink] = useState(false);
+    const [connected, setConnected] = useState(false);
     //
     var util = require("util");
     console.log("Props: " + util.inspect(props, {showHidden: false, depth: null}));
@@ -136,6 +137,18 @@ const Mint = props => {
         setLoading(false);
     };
 
+    const onConnect = async (event) => {
+        setErrorMessage('');
+        event.preventDefault();
+        setLoading(true);
+        try {
+            console.log("Connect wallet");
+        }
+        catch (err) {
+        }
+        setLoading(false);
+    }
+
     return (
         <div className={styles.main}>
             <style jsx global>{`
@@ -169,6 +182,8 @@ const Mint = props => {
                     totalSupply={props.totalSupply}
                     maxSupply={props.maxSupply}
                     loading={loading}
+                    connected={connected}
+                    onConnect={onConnect}
                 ></ChMintForm>
             }
 

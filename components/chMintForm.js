@@ -12,7 +12,9 @@ export default function ChMintForm(ctx) {
         onSubmit,
         totalSupply,
         maxSupply,
-        loading
+        loading,
+        connected,
+        onConnect
     } = ctx;
     console.log("loggggggg: " + ctx);
     console.log("loading: " + loading);
@@ -32,9 +34,13 @@ export default function ChMintForm(ctx) {
             <div className={styles.under} style={{fontSize: "22px"}}>{totalSupply}/{maxSupply}</div>
             <br/>
             <br/>
-
-            <button className={styles.mintme} type="button" onClick={onSubmit}>MINT</button>
-
+            {
+                connected
+                    ?
+                    <button className={styles.mintme} type="button" onClick={onSubmit}>MINT</button>
+                    :
+                    <button className={styles.mintme} type="button" onClick={onConnect}>CONNECT</button>
+            }
             <br/><br/>
             <br/>
             <div className={styles.under}>Cost 0.07 ETH per unit <br/>+ gas fees</div>
