@@ -134,11 +134,12 @@ console.log("=================================== 5 =============================
             console.log(`Minted ${tokens} with ${mintedWith} for a total of ${totalValue}`);
 
             // Router.pushRoute('/');
+            setSuccessMessage(true);
+
         } catch (err) {
             setErrorMessage(err.message);
             console.log(err.message);
         }
-        setSuccessMessage(true);
         setLoading(false);
     };
 
