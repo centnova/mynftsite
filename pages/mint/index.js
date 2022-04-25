@@ -5,12 +5,14 @@ import provider from "../../ethereum/_ethers";
 import contract from "../../ethereum/_contract";
 import {ethers} from "ethers";
 import ChMintForm from "../../components/chMintForm";
+import ChSuccessTransactionForm from "../../components/chSuccessTransactionForm";
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
     const [totalValue, setTotalValue] = useState(0.07);
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
     //
     var util = require("util");
     console.log("Props: " + util.inspect(props, {showHidden: false, depth: null}));
@@ -121,6 +123,7 @@ const Mint = props => {
             setErrorMessage(err.message);
             console.log(err.message);
         }
+        setSuccessMessage(true);
         setLoading(false);
     };
 
@@ -140,18 +143,25 @@ const Mint = props => {
             <br/>
             <div className={styles.under}></div>
             <br/>
-            <ChMintForm
-                saleMessage={saleMessage}
-                totalValue={totalValue}
-                tokens={tokens}
-                decreaseTokens={decreaseTokens}
-                increaseTokens={increaseTokens}
-                onSubmit={onSubmit}
-                totalSupply={props.totalSupply}
-                maxSupply={props.maxSupply}
-                loading={loading}
-            ></ChMintForm>
-
+            {
+                successMessage ?
+                <ChSuccessTransactionForm
+                    totalValue={totalValue}
+                    tokens={tokens}
+                    etherscanLink = {""}
+                ></ChSuccessTransactionForm> :
+                <ChMintForm
+                    saleMessage={saleMessage}
+                    totalValue={totalValue}
+                    tokens={tokens}
+                    decreaseTokens={decreaseTokens}
+                    increaseTokens={increaseTokens}
+                    onSubmit={onSubmit}
+                    totalSupply={props.totalSupply}
+                    maxSupply={props.maxSupply}
+                    loading={loading}
+                ></ChMintForm>
+            }
 
             <br/>
 

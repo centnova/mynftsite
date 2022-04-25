@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styles from "../styles/minting.module.css";
 
 
-export default function chMintForm(ctx) {
+export default function ChMintForm(ctx) {
     let {
         saleMessage,
         totalValue,
