@@ -13,6 +13,7 @@ const Mint = props => {
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
+    const [etherscanLink, setEtherscanLink] = useState(false);
     //
     var util = require("util");
     console.log("Props: " + util.inspect(props, {showHidden: false, depth: null}));
@@ -87,6 +88,8 @@ const Mint = props => {
             const weiValue = ethers.utils.parseEther(totalValue.toString());
             let mintedWith = "";
 
+            let transaction;
+
             if (wlSaleIsActive) {
                 let proofs = [];
                 let waladdress = await accounts.getAddress();
@@ -105,15 +108,21 @@ const Mint = props => {
                 }
 
 
-                await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
+                transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
                 mintedWith = "Whitelist";
             } else if (saleIsActive) {
-                await sendWithSigner.mintToken(tokens, {value: weiValue});
+                transaction = await sendWithSigner.mintToken(tokens, {value: weiValue});
                 mintedWith = "Public Sale";
             } else {
                 console.log("Neither sale is active, we will not send a transaction");
                 return
             }
+
+            console.log(`Minted ${tokens} for a total of ${totalValue}`);
+            const receipt = await transaction.wait();
+            console.log(receipt)
+            const _contractUrl = 'https://' + "rinkeby.etherscan.io/tx/"+receipt['transactionHash'];
+            setEtherscanLink(_contractUrl);
 
             console.log(weiValue);
             console.log(`Minted ${tokens} with ${mintedWith} for a total of ${totalValue}`);
@@ -148,7 +157,7 @@ const Mint = props => {
                 <ChSuccessTransactionForm
                     totalValue={totalValue}
                     tokens={tokens}
-                    etherscanLink = {""}
+                    etherscanLink = {etherscanLink}
                 ></ChSuccessTransactionForm> :
                 <ChMintForm
                     saleMessage={saleMessage}
