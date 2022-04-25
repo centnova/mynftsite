@@ -4,6 +4,7 @@ import {useState} from "react";
 import provider from "../../ethereum/_ethers";
 import contract from "../../ethereum/_contract";
 import {ethers} from "ethers";
+import ChMintForm from "../../components/chMintForm";
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
@@ -145,34 +146,23 @@ const Mint = props => {
                 <br/>
                     <div className={styles.under}></div>
                     <br/>
-                    <div className={styles.under}>{saleMessage}</div>
-            <br/><br/>
-                        <div className={styles.number}>
-                            <button className={styles.roundButton} onClick={decreaseTokens}>-</button>
-                            <input type="text" className={styles.mintnum} readOnly value={tokens}/>
-                            <button className={styles.roundButton} onClick={increaseTokens}>+</button>
-                        </div>
-            <br/><br/>
-                  <div className={styles.under} style={{fontSize: "22px"}}>{totalValue} ETH</div>
-                        <br/><br/>
-                            <div className={styles.under} style={{fontSize: "22px"}}>{props.totalSupply}/{props.maxSupply}</div>
-                            <br/>
-                                <br/>
+<ChMintForm
+    saleMessage={saleMessage}
+    totalValue={totalValue}
+    tokens={tokens}
+    decreaseTokens={decreaseTokens}
+    increaseTokens={increaseTokens}
+    onSubmit={onSubmit}
+    totalSupply={props.totalSupply}
+    maxSupply={props.maxSupply}
+></ChMintForm>
 
-                                    <button className={styles.mintme} type="button" onClick={onSubmit}>MINT</button>
 
-                                    <br/><br/>
-                                        <br/>
-                                            <div className={styles.under}>Cost 0.07 ETH per unit <br/>+ gas fees</div>
-                                            <br/>
 
-                                                <br/><br/><br/><br/>
-                                                    <div className={styles.under}
-                                                         style={{fontSize: "14px", fontFamily: "Poppins"}}>Please make sure
-                                                        you are connected to the right network (Ethereum Mainnet) and
-                                                        the correct address. Please note: Once you make the purchase,
-                                                        you cannot undo this action.
-                                                    </div>
+
+
+
+
                                                     <br/>
 
         </div>
