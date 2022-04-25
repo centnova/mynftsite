@@ -181,6 +181,11 @@ font-family: "MonumentExtended-Heavy";
     100% { background-position: 0 0; }
 }
 
+.isdisabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 
 
 

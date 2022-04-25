@@ -155,6 +155,7 @@ const Mint = props => {
     onSubmit={onSubmit}
     totalSupply={props.totalSupply}
     maxSupply={props.maxSupply}
+    loading={loading}
 ></ChMintForm>
 
 

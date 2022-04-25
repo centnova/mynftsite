@@ -3,11 +3,12 @@ import styles from "../styles/minting.module.css";
 
 
 export default function chMintForm(ctx) {
-        let {saleMessage, totalValue, tokens, decreaseTokens, increaseTokens, onSubmit, totalSupply, maxSupply} = ctx;
+        let {saleMessage, totalValue, tokens, decreaseTokens, increaseTokens, onSubmit, totalSupply, maxSupply, loading} = ctx;
         console.log("loggggggg: " +  ctx);
+        console.log("loading: " + loading);
 
     return(
-        <div>
+        <div className={ loading ? styles.isdisabled : ""}>
                                 <div className={styles.under}>{saleMessage}</div>
             <br/><br/>
                         <div className={styles.number}>
