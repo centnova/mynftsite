@@ -103,16 +103,20 @@ console.log("=================================== 3 =============================
 
                 // [{'address': 'AB5Dae357BdBd6F7873ddC9741022d8c90a890e4', 'leaf': '25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', 'proof': ['80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db']}, {'address': '506A3b92e6D80e6aCb7106a70CDd59A58D588491', 'leaf': '80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', 'proof': ['25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774']}]
                 if (waladdress === '0xAB5Dae357BdBd6F7873ddC9741022d8c90a890e4') {
-                    proofs = ['0x80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db'];
+                    proofs = ['0x80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
                     console.log("Wallet address: " + waladdress);
                 } else if (waladdress === '0x506A3b92e6D80e6aCb7106a70CDd59A58D588491') {
-                    proofs = ['0x25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774'];
+                    proofs = ['0x25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
                     console.log("Wallet address: " + waladdress);
-                } else {
+                }
+                else if (waladdress === '0xF1fAE3Fe6712c2f297729Dc05C1dd242485680eD') {
+                    proofs = ['0x95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28'];
+                }
+                 else {
                     console.log("NO PROOFS - NOT WHITELISTED");
                     return
                 }
-
+// [{'address': 'AB5Dae357BdBd6F7873ddC9741022d8c90a890e4', 'leaf': '25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', 'proof': ['80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea']}, {'address': '506A3b92e6D80e6aCb7106a70CDd59A58D588491', 'leaf': '80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', 'proof': ['25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea']}, {'address': 'F1fAE3Fe6712c2f297729Dc05C1dd242485680eD', 'leaf': '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea', 'proof': ['95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28']}]
 console.log("=================================== 4 ====================================");
                 transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
                 mintedWith = "Whitelist";
@@ -137,7 +141,12 @@ console.log("=================================== 5 =============================
             setSuccessMessage(true);
 
         } catch (err) {
-            setErrorMessage(err.message);
+            let errToDisplay = "An error occurred!";
+            if (err.message.includes("invalid Merkle proof")) {
+                errToDisplay = "Invalid Merkle Proof. You are not in the Whitelist!";
+            }
+
+            setErrorMessage(errToDisplay);
             console.log(err.message);
         }
         setLoading(false);
@@ -171,6 +180,8 @@ console.log("=================================== 5 =============================
             console.log("Connect wallet");
         }
         catch (err) {
+            let errToDisplay = "An error occurred!";
+            setErrorMessage(errToDisplay);
         }
         setLoading(false);
     }
@@ -188,8 +199,8 @@ console.log("=================================== 5 =============================
       `}</style>
             <img src="img/logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
             <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
-            <br/>
             <div className={styles.under}></div>
+            {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/> }
             <br/>
             {
                 successMessage ?
@@ -210,6 +221,7 @@ console.log("=================================== 5 =============================
                     loading={loading}
                     connected={connected}
                     onConnect={onConnect}
+                    account={account}
                 ></ChMintForm>
             }
 

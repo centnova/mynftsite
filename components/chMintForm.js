@@ -14,7 +14,8 @@ export default function ChMintForm(ctx) {
         maxSupply,
         loading,
         connected,
-        onConnect
+        onConnect,
+        account
     } = ctx;
     console.log("loggggggg: " + ctx);
     console.log("loading: " + loading);
@@ -43,6 +44,16 @@ export default function ChMintForm(ctx) {
             }
             <br/><br/>
             <br/>
+            {
+                connected
+                    ?
+                    <div>
+                        <div className={styles.under}>{account}</div>
+                    </div>
+                    :
+                    undefined
+            }
+
             <div className={styles.under}>Cost 0.07 ETH per unit <br/>+ gas fees</div>
             <br/>
 
