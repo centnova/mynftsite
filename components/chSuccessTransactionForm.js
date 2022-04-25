@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import {UseRouter} from 'next/router';
+import styles from "../styles/minting.module.css";
 
 export default function ChSuccessTransactionForm(ctx) {
 
@@ -14,13 +14,14 @@ export default function ChSuccessTransactionForm(ctx) {
     return (
         <form action="">
             <br/>
-            <strong>Congratulations! You just send a tx to mint {tokens} {tokens > 1 && <span>{nftName} NFTs</span> ||
-            <span>{nftName} NFT</span>} for {totalValue} ETH.</strong>
-            <br/>
-            <span style={{"fontSize": "0.9rem"}}><a href={etherscanLink} target="_blank" rel="noreferrer">Check your transaction in etherscan</a></span>
-            <div className="col-lg-12 center">
-                <button type="submit">WAIT! I WANT TO MINT MORE!</button>
+            <div className={styles.under}>Congratulations! You have successfully minted {tokens} {tokens > 1 &&
+            <span>{nftName} NFTs</span> ||
+            <span>{nftName} NFT</span>} for {totalValue} ETH.
             </div>
+            <br/><br/>
+            <span style={{"fontSize": "0.9rem"}}><a href={etherscanLink} target="_blank" rel="noreferrer">Check your transaction in etherscan</a></span>
+            <br/><br/><br/>
+            <button className={styles.mintme} type="submit">WAIT! I WANT TO MINT MORE!</button>
         </form>
     );
 }
