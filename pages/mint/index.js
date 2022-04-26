@@ -6,6 +6,7 @@ import contract from "../../ethereum/_contract";
 import {ethers} from "ethers";
 import ChMintForm from "../../components/chMintForm";
 import ChSuccessTransactionForm from "../../components/chSuccessTransactionForm";
+import merklelist from "../../lib/merkle_whitelist.js";
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
@@ -18,6 +19,9 @@ const Mint = props => {
     const [provider, setProvider] = useState(null);
     const [account, setAccount] = useState('');
     const [chainName, setChainName] = useState('');
+    console.log("++++++++++++++++++");
+    console.log(merklelist);
+    console.log("++++++++++++++++++");
 
     //
     var util = require("util");
@@ -29,11 +33,11 @@ const Mint = props => {
     let saleMessage = 'MINT IS NOT OPEN';
 
     if (props.wlSaleIsActive) {
-        maxTokens = 4;
-        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens}.`;
+        maxTokens = 12;
+        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} CONFUSED HEROES!`;
     } else if (props.saleIsActive) {
-        maxTokens = 8;
-        saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} PER TRANSACTION`;
+        maxTokens = 12;
+        saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} CONFUSED HEROES!`;
     } else {
         saleMessage = `MINT IS NOT OPEN`;
     }
@@ -97,25 +101,51 @@ console.log("=================================== 2 =============================
             let transaction;
 console.log("=================================== 3 ====================================");
             if (wlSaleIsActive) {
+                let whitelisted = false;
                 let proofs = [];
                 let waladdress = await accounts.getAddress();
                 console.log("WALADDRESS" + waladdress);
 
+
+
                 // [{'address': 'AB5Dae357BdBd6F7873ddC9741022d8c90a890e4', 'leaf': '25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', 'proof': ['80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db']}, {'address': '506A3b92e6D80e6aCb7106a70CDd59A58D588491', 'leaf': '80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', 'proof': ['25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774']}]
-                if (waladdress === '0xAB5Dae357BdBd6F7873ddC9741022d8c90a890e4') {
-                    proofs = ['0x80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
-                    console.log("Wallet address: " + waladdress);
-                } else if (waladdress === '0x506A3b92e6D80e6aCb7106a70CDd59A58D588491') {
-                    proofs = ['0x25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
-                    console.log("Wallet address: " + waladdress);
+
+
+                // if (waladdress === '0xAB5Dae357BdBd6F7873ddC9741022d8c90a890e4') {
+                //     proofs = ['0x80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
+                //     console.log("Wallet address: " + waladdress);
+                // } else if (waladdress === '0x506A3b92e6D80e6aCb7106a70CDd59A58D588491') {
+                //     proofs = ['0x25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
+                //     console.log("Wallet address: " + waladdress);
+                // }
+                // else if (waladdress === '0xF1fAE3Fe6712c2f297729Dc05C1dd242485680eD') {
+                //     proofs = ['0x95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28'];
+                // }
+                // else {
+                //    console.log("NO PROOFS - NOT WHITELISTED");
+                //    setErrorMessage(`Account ${waladdress} is not in the whitelist. Please connect or switch to the whitelisted account.`);
+                //    setConnected(false);
+                //    setLoading(false);
+                //    return
+                // }
+
+               for (let i = 0; i < merklelist.length; i++) {
+                   console.log("---->" + merklelist[i]['address']);
+                   if (waladdress === merklelist[i]['address']) {
+                              whitelisted = true;
+                              proofs = merklelist[i]['proof'];
+                              console.log("Whitelisted with proofs: " + proofs);
+                   }
                 }
-                else if (waladdress === '0xF1fAE3Fe6712c2f297729Dc05C1dd242485680eD') {
-                    proofs = ['0x95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28'];
-                }
-                 else {
-                    console.log("NO PROOFS - NOT WHITELISTED");
-                    return
-                }
+
+               if (!whitelisted) {
+                   console.log("NO PROOFS - NOT WHITELISTED");
+                   setErrorMessage(`Account ${waladdress} is not in the whitelist. Please connect or switch to the whitelisted account.`);
+                   setConnected(false);
+                   setLoading(false);
+                   return
+               }
+
 // [{'address': 'AB5Dae357BdBd6F7873ddC9741022d8c90a890e4', 'leaf': '25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', 'proof': ['80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea']}, {'address': '506A3b92e6D80e6aCb7106a70CDd59A58D588491', 'leaf': '80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', 'proof': ['25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea']}, {'address': 'F1fAE3Fe6712c2f297729Dc05C1dd242485680eD', 'leaf': '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea', 'proof': ['95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28']}]
 console.log("=================================== 4 ====================================");
                 transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
