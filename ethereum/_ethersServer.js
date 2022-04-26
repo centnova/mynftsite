@@ -1,5 +1,5 @@
 const { ethers } = require("ethers");
-const providerUrl = "https://rinkeby.infura.io/v3/5eeb9a6e5ea54382aaa5d581f5712462";
+const providerUrl = "https://mainnet.infura.io/v3/e810ba6a4ded47b7a58141a764d7c08d";
 
 let providerServer;
 providerServer = new ethers.providers.JsonRpcProvider(providerUrl);
