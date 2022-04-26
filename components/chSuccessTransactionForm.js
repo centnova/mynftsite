@@ -19,9 +19,9 @@ export default function ChSuccessTransactionForm(ctx) {
             <span>{nftName} NFT</span>} for {totalValue} ETH.
             </div>
             <br/><br/>
-            <span style={{"fontSize": "0.9rem"}}><a href={etherscanLink} target="_blank" rel="noreferrer">Check your transaction in etherscan</a></span>
+
             <br/><br/><br/>
-            <button className={styles.mintme} type="submit">WAIT! I WANT TO MINT MORE!</button>
+            <button className={styles.mintme} type="submit">I WANT TO MINT MORE!</button>
         </form>
     );
 }

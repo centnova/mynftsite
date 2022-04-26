@@ -17,44 +17,41 @@ export default function ChMintForm(ctx) {
         onConnect,
         account
     } = ctx;
-    console.log("loggggggg: " + ctx);
-    console.log("loading: " + loading);
 
     return (
         <div className={loading ? styles.isdisabled : ""}>
             <div className={styles.under}>{saleMessage}</div>
-            <br/><br/>
+            <br/>
             <div className={styles.number}>
                 <button className={styles.roundButton} onClick={decreaseTokens}>-</button>
                 <input type="text" className={styles.mintnum} readOnly value={tokens}/>
                 <button className={styles.roundButton} onClick={increaseTokens}>+</button>
             </div>
-            <br/><br/>
-            <div className={styles.under} style={{fontSize: "22px"}}>{totalValue} ETH</div>
-            <br/><br/>
-            <div className={styles.under} style={{fontSize: "22px"}}>{totalSupply}/{maxSupply}</div>
             <br/>
+            <div className={styles.under}>Total {totalValue} ETH + gas fees</div>
+            <br/><br/>
+
             <br/>
             {
                 connected
                     ?
-                    <button className={styles.mintme} type="button" onClick={onSubmit}>MINT</button>
+                    <button className={styles.mintme} type="button" onClick={onSubmit}>{loading?"BUSY":"MINT"}</button>
                     :
-                    <button className={styles.mintme} type="button" onClick={onConnect}>CONNECT</button>
+                    <button className={styles.mintme} type="button" onClick={onConnect}>{loading?"BUSY":"CONNECT"}</button>
             }
             <br/><br/>
-            <br/>
+            <br/><br/>
             {
                 connected
                     ?
                     <div>
-                        <div className={styles.under}>{account}</div>
+                        <div className={styles.under}>Connected Wallet:<br/>{account}</div>
                     </div>
                     :
                     undefined
             }
 
-            <div className={styles.under}>Cost 0.07 ETH per unit <br/>+ gas fees</div>
+
             <br/>
 
             <br/><br/><br/><br/>

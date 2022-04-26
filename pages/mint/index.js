@@ -1,7 +1,7 @@
 import styles from '../../styles/minting.module.css'
 import useWhitelist from "../../lib/useWhitelist";
 import {useState} from "react";
-import provider from "../../ethereum/_ethers";
+// import provider from "../../ethereum/_ethers";
 import contract from "../../ethereum/_contract";
 import {ethers} from "ethers";
 import ChMintForm from "../../components/chMintForm";
@@ -19,13 +19,8 @@ const Mint = props => {
     const [provider, setProvider] = useState(null);
     const [account, setAccount] = useState('');
     const [chainName, setChainName] = useState('');
-    console.log("++++++++++++++++++");
-    console.log(merklelist);
-    console.log("++++++++++++++++++");
 
-    //
-    var util = require("util");
-    console.log("Props: " + util.inspect(props, {showHidden: false, depth: null}));
+    const etherscanNetwork = "rinkeby.etherscan.io";
 
     // const whitelistMint = false;
 
@@ -34,10 +29,10 @@ const Mint = props => {
 
     if (props.wlSaleIsActive) {
         maxTokens = 12;
-        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} CONFUSED HEROES!`;
+        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs`;
     } else if (props.saleIsActive) {
         maxTokens = 12;
-        saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} CONFUSED HEROES!`;
+        saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} NFTs`;
     } else {
         saleMessage = `MINT IS NOT OPEN`;
     }
@@ -56,7 +51,6 @@ const Mint = props => {
 
         setTotalValue(_totalValue);
         setTokens(_tokens);
-        console.log("Decrease tokens: " + _tokens + " Total Value: " + _totalValue);
     }
 
     const increaseTokens = async (event) => {
@@ -72,24 +66,18 @@ const Mint = props => {
 
         setTotalValue(_totalValue);
         setTokens(_tokens);
-        console.log("Increase tokens: " + _tokens + " Total Value: " + _totalValue);
     }
 
     const onSubmit = async (event) => {
         setErrorMessage('');
         event.preventDefault();
         setLoading(true);
-        console.log("=================================== 1 ====================================");
         try {
 
             const accounts = await provider.getSigner();
-            console.log("Accounts: " + util.inspect(accounts, {showHidden: false, depth: null}));
 
-            console.log(contract);
-
-console.log("=================================== 2 ====================================");
             // recheck if saleIsActive, just in case something changed
-            // todo add here also the whitelist case
+
             let saleIsActive = await contract.saleIsActive();
             let wlSaleIsActive = await contract.wlSaleIsActive();
 
@@ -99,38 +87,13 @@ console.log("=================================== 2 =============================
             let mintedWith = "";
 
             let transaction;
-console.log("=================================== 3 ====================================");
+
             if (wlSaleIsActive) {
                 let whitelisted = false;
                 let proofs = [];
                 let waladdress = await accounts.getAddress();
-                console.log("WALADDRESS" + waladdress);
-
-
-
-                // [{'address': 'AB5Dae357BdBd6F7873ddC9741022d8c90a890e4', 'leaf': '25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', 'proof': ['80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db']}, {'address': '506A3b92e6D80e6aCb7106a70CDd59A58D588491', 'leaf': '80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', 'proof': ['25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774']}]
-
-
-                // if (waladdress === '0xAB5Dae357BdBd6F7873ddC9741022d8c90a890e4') {
-                //     proofs = ['0x80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
-                //     console.log("Wallet address: " + waladdress);
-                // } else if (waladdress === '0x506A3b92e6D80e6aCb7106a70CDd59A58D588491') {
-                //     proofs = ['0x25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '0x18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea'];
-                //     console.log("Wallet address: " + waladdress);
-                // }
-                // else if (waladdress === '0xF1fAE3Fe6712c2f297729Dc05C1dd242485680eD') {
-                //     proofs = ['0x95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28'];
-                // }
-                // else {
-                //    console.log("NO PROOFS - NOT WHITELISTED");
-                //    setErrorMessage(`Account ${waladdress} is not in the whitelist. Please connect or switch to the whitelisted account.`);
-                //    setConnected(false);
-                //    setLoading(false);
-                //    return
-                // }
 
                for (let i = 0; i < merklelist.length; i++) {
-                   console.log("---->" + merklelist[i]['address']);
                    if (waladdress === merklelist[i]['address']) {
                               whitelisted = true;
                               proofs = merklelist[i]['proof'];
@@ -146,8 +109,7 @@ console.log("=================================== 3 =============================
                    return
                }
 
-// [{'address': 'AB5Dae357BdBd6F7873ddC9741022d8c90a890e4', 'leaf': '25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', 'proof': ['80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea']}, {'address': '506A3b92e6D80e6aCb7106a70CDd59A58D588491', 'leaf': '80bc166688d1b9b7144865894626695cbc86cff46fc239d4e4ef9f63fda2f4db', 'proof': ['25982080fcd47bab8c4177e3da42a49c461dea32dc9b6973bb5350c05fccd774', '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea']}, {'address': 'F1fAE3Fe6712c2f297729Dc05C1dd242485680eD', 'leaf': '18c123e1dda3569205ca6925344cf6aaae9e9d0c5c600796c789c0010651e0ea', 'proof': ['95e8712a5bcf7d15014f5a7b77629ef9d73588c5126dba487d77024393221f28']}]
-console.log("=================================== 4 ====================================");
+
                 transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
                 mintedWith = "Whitelist";
             } else if (saleIsActive) {
@@ -158,13 +120,12 @@ console.log("=================================== 4 =============================
                 return
             }
 
-            console.log(`Minted ${tokens} for a total of ${totalValue}`);
+            console.log(`Sent a tx for ${tokens} tokens for a total of ${totalValue}`);
             const receipt = await transaction.wait();
-            console.log(receipt)
-            const _contractUrl = 'https://' + "rinkeby.etherscan.io/tx/"+receipt['transactionHash'];
+
+            const _contractUrl = 'https://' + etherscanNetwork + "/tx/"+receipt['transactionHash'];
             setEtherscanLink(_contractUrl);
-console.log("=================================== 5 ====================================");
-            console.log(weiValue);
+
             console.log(`Minted ${tokens} with ${mintedWith} for a total of ${totalValue}`);
 
             // Router.pushRoute('/');
@@ -187,26 +148,26 @@ console.log("=================================== 5 =============================
         event.preventDefault();
         setLoading(true);
 
-        await window.ethereum.request({method: 'eth_requestAccounts'});
-        const provider = await new ethers.providers.Web3Provider(window.ethereum);
-        setProvider(provider);
-
-        // provider = new ethers.Web3Provider(ethers.web3.currentProvider);
-        // await provider.send('eth_requestAccounts', []);
-
-        const signer = await provider.getSigner(0);
-        console.log(signer);
-        const _address = await signer.getAddress();
-        console.log("After connect the wallet address is: " + _address);
-        setAccount(_address);
-        setChainName(await provider.getNetwork());
-        console.log("After connect the chainName is: " + chainName);
-        // if (signer === undefined) setAccount(signer.)
-        console.log(provider);
-
-        setConnected(true);
-
         try {
+            await window.ethereum.request({method: 'eth_requestAccounts'});
+            const provider = await new ethers.providers.Web3Provider(window.ethereum);
+            setProvider(provider);
+
+            // provider = new ethers.Web3Provider(ethers.web3.currentProvider);
+            // await provider.send('eth_requestAccounts', []);
+
+            const signer = await provider.getSigner(0);
+            console.log(signer);
+            const _address = await signer.getAddress();
+            console.log("After connect the wallet address is: " + _address);
+            setAccount(_address);
+            setChainName(await provider.getNetwork());
+            console.log("After connect the chainName is: " + chainName);
+            // if (signer === undefined) setAccount(signer.)
+            console.log(provider);
+
+            setConnected(true);
+
             console.log("Connect wallet");
         }
         catch (err) {
@@ -262,7 +223,6 @@ console.log("=================================== 5 =============================
 }
 
 export const getServerSideProps = async ({req, res}) => {
-    console.log("Inside Server Props");
     const ipData = useWhitelist(req, res)
 
     let saleIsActive = await contract.saleIsActive();
@@ -272,12 +232,8 @@ export const getServerSideProps = async ({req, res}) => {
 
     totalSupply = totalSupply.toNumber();
     maxSupply = maxSupply.toNumber();
-    // let saleIsActive = true;
-    console.log(`Sale is active (serverprops): ${saleIsActive} totalSupply: ${totalSupply} maxSupply: ${maxSupply}`);
 
     let r = {props: {saleIsActive, wlSaleIsActive, totalSupply, maxSupply}};
-    console.log(r);
-    console.log("Exiting Server Props");
     return r;
 }
 
