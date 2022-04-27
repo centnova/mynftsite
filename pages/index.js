@@ -179,12 +179,12 @@ const Mint = props => {
     return (
         <div>
             <div className="headertop">
-                <div className="logo"><a href="https://confusedheroes.com" target="_blank" rel="noreferrer"> <img
+                <div className="styles.logo"><a href="https://confusedheroes.com" target="_blank" rel="noreferrer"> <img
                     src="/img/chlogo.png"
                     alt="Confused Heroes"
                     width="60"/></a></div>
 
-                <div className="social">
+                <div className="styles.social">
                     <a href="https://www.instagram.com/confusedheroesnft/" target="_blank" rel="noreferrer"> <i
                         className="fab fa-instagram"/></a>
 
@@ -210,7 +210,6 @@ const Mint = props => {
                 <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
                 <div className={styles.under} style={{fontSize: "22px"}}>MINTED {props.totalSupply}</div>
                 <br/>
-                <div className={styles.under}/>
                 {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
                 {
                     successMessage ?
