@@ -27,12 +27,13 @@ const Mint = props => {
     let maxTokens = 1;
     let saleMessage = 'MINT IS NOT OPEN';
 
-    if (props.wlSaleIsActive) {
+    if (props.saleIsActive) {
         maxTokens = 12;
         saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs`;
-    } else if (props.saleIsActive) {
+    }
+    else if (props.wlSaleIsActive) {
         maxTokens = 12;
-        saleMessage = `PUBLIC MINT. YOU CAN MINT UP TO ${maxTokens} NFTs`;
+        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs!`;
     } else {
         saleMessage = `MINT IS NOT OPEN`;
     }
@@ -88,7 +89,11 @@ const Mint = props => {
 
             let transaction;
 
-            if (wlSaleIsActive) {
+            if (saleIsActive) {
+                console.log("Fallback");
+                transaction = await sendWithSigner.mintToken(tokens, {value: weiValue});
+            }
+            else if (wlSaleIsActive) {
                 let whitelisted = false;
                 let proofs = [];
                 let waladdress = await accounts.getAddress();
@@ -112,10 +117,8 @@ const Mint = props => {
 
                 transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
                 mintedWith = "Whitelist";
-            } else if (saleIsActive) {
-                transaction = await sendWithSigner.mintToken(tokens, {value: weiValue});
-                mintedWith = "Public Sale";
-            } else {
+            }
+            else {
                 console.log("Neither sale is active, we will not send a transaction");
                 return
             }
@@ -162,7 +165,7 @@ const Mint = props => {
             console.log("After connect the wallet address is: " + _address);
             setAccount(_address);
             setChainName(await provider.getNetwork());
-            console.log("After connect the chainName is: " + chainName);
+            // console.log("After connect the chainName is: " + chainName);
             // if (signer === undefined) setAccount(signer.)
             console.log(provider);
 
