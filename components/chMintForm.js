@@ -29,9 +29,7 @@ export default function ChMintForm(ctx) {
             </div>
             <br/>
             <div className={styles.under}>Total {totalValue} ETH + gas fees</div>
-            <br/><br/>
-
-            <br/>
+            <br/><br/><br/>
             {
                 connected
                     ?
@@ -39,8 +37,7 @@ export default function ChMintForm(ctx) {
                     :
                     <button className={styles.mintme} type="button" onClick={onConnect}>{loading?"BUSY":"CONNECT"}</button>
             }
-            <br/><br/>
-            <br/><br/>
+            <br/><br/><br/><br/>
             {
                 connected
                     ?
@@ -50,17 +47,14 @@ export default function ChMintForm(ctx) {
                     :
                     undefined
             }
-
-
-            <br/>
-
-            <br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/><br/>
             <div className={styles.under}
                  style={{fontSize: "14px", fontFamily: "Poppins"}}>Please make sure
                 you are connected to the right network (Ethereum Mainnet) and
                 the correct address. Please note: Once you make the purchase,
                 you cannot undo this action.
             </div>
+            <br/>
         </div>
     );
 }
