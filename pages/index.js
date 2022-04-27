@@ -1,7 +1,6 @@
 import styles from '../styles/minting.module.css'
 import useWhitelist from "../lib/useWhitelist";
 import {useState} from "react";
-// import provider from "../../ethereum/_ethers";
 import contract from "../ethereum/_contract";
 import {ethers} from "ethers";
 import ChMintForm from "../components/chMintForm";
