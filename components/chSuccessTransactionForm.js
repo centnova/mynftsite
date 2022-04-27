@@ -16,12 +16,12 @@ export default function ChSuccessTransactionForm(ctx) {
             <br/>
             <div className={styles.under}>Congratulations! You have successfully minted {tokens} {tokens > 1 &&
             <span>{nftName} NFTs</span> ||
-            <span>{nftName} NFT</span>} for {totalValue} ETH.
+            <span>{nftName} NFT</span>} for {totalValue} ETH
             </div>
             <br/><br/>
-
+            <span style={{"fontSize": "0.9rem"}}><a href={etherscanLink} target="_blank" rel="noreferrer">Check your transaction in etherscan</a></span>
             <br/><br/><br/>
-            <button className={styles.mintme} type="submit">I WANT TO MINT MORE!</button>
+            <button className={styles.mintme} type="submit">MINT MORE</button>
         </form>
     );
 }
