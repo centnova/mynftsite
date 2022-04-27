@@ -28,7 +28,7 @@ const Mint = props => {
 
     if (props.saleIsActive) {
         maxTokens = 12;
-        saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs`;
+        saleMessage = `YOU CAN MINT UP TO ${maxTokens} NFTs`;
     } else if (props.wlSaleIsActive) {
         maxTokens = 12;
         saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs!`;
@@ -212,8 +212,8 @@ const Mint = props => {
 }
       `}</style>
                 <img src="img/logomain.png" alt="Confused Heroes" width="240"/>
-                <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
-                <div className={styles.under} style={{fontSize: "22px"}}>MINTED {props.totalSupply}</div>
+                <div className={styles.heads}>MINT<br/>CONFUSED HEROES<br/></div>
+                <div className={styles.under} style={{fontSize: "22px"}}><br/>MINTED {props.totalSupply}</div>
                 <br/>
                 {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
                 {
