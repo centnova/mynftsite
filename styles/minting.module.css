@@ -20,6 +20,12 @@ MINT CONFUSED HEROES
     BODY
 -----------------------------------------------------------------*/
 
+.headertop {
+    width: 100%;
+    font-size: 32px;
+    display: inline-block;
+}
+
 
 .main {
     width: 100%;
