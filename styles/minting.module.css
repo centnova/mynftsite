@@ -43,6 +43,8 @@ MINT CONFUSED HEROES
     margin: auto;
     max-width: 640px;
     text-align: center;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(217, 77, 182, 0.2) 100%);
+    border-radius: 35px 35px 35px 35px;
 }
 
 .mintme {
