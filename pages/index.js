@@ -179,12 +179,12 @@ const Mint = props => {
     return (
         <div>
             <div className="headertop">
-                <div className="styles.logo"><a href="https://confusedheroes.com" target="_blank" rel="noreferrer"> <img
+                <div className={styles.logo}><a href="https://confusedheroes.com" target="_blank" rel="noreferrer"> <img
                     src="/img/chlogo.png"
                     alt="Confused Heroes"
                     width="60"/></a></div>
 
-                <div className="styles.social">
+                <div className={styles.social}>
                     <a href="https://www.instagram.com/confusedheroesnft/" target="_blank" rel="noreferrer"> <i
                         className="fab fa-instagram"/></a>
 
