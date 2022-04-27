@@ -30,8 +30,7 @@ const Mint = props => {
     if (props.saleIsActive) {
         maxTokens = 12;
         saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs`;
-    }
-    else if (props.wlSaleIsActive) {
+    } else if (props.wlSaleIsActive) {
         maxTokens = 12;
         saleMessage = `WHITELIST MINT. YOU CAN MINT UP TO ${maxTokens} NFTs!`;
     } else {
@@ -92,33 +91,31 @@ const Mint = props => {
             if (saleIsActive) {
                 console.log("Fallback");
                 transaction = await sendWithSigner.mintToken(tokens, {value: weiValue});
-            }
-            else if (wlSaleIsActive) {
+            } else if (wlSaleIsActive) {
                 let whitelisted = false;
                 let proofs = [];
                 let waladdress = await accounts.getAddress();
 
-               for (let i = 0; i < merklelist.length; i++) {
-                   if (waladdress === merklelist[i]['address']) {
-                              whitelisted = true;
-                              proofs = merklelist[i]['proof'];
-                              console.log("Whitelisted with proofs: " + proofs);
-                   }
+                for (let i = 0; i < merklelist.length; i++) {
+                    if (waladdress === merklelist[i]['address']) {
+                        whitelisted = true;
+                        proofs = merklelist[i]['proof'];
+                        console.log("Whitelisted with proofs: " + proofs);
+                    }
                 }
 
-               if (!whitelisted) {
-                   console.log("NO PROOFS - NOT WHITELISTED");
-                   setErrorMessage(`Account ${waladdress} is not in the whitelist. Please connect or switch to the whitelisted account.`);
-                   setConnected(false);
-                   setLoading(false);
-                   return
-               }
+                if (!whitelisted) {
+                    console.log("NO PROOFS - NOT WHITELISTED");
+                    setErrorMessage(`Account ${waladdress} is not in the whitelist. Please connect or switch to the whitelisted account.`);
+                    setConnected(false);
+                    setLoading(false);
+                    return
+                }
 
 
                 transaction = await sendWithSigner.wlMintToken(tokens, proofs, {value: weiValue});
                 mintedWith = "Whitelist";
-            }
-            else {
+            } else {
                 console.log("Neither sale is active, we will not send a transaction");
                 return
             }
@@ -126,7 +123,7 @@ const Mint = props => {
             console.log(`Sent a tx for ${tokens} tokens for a total of ${totalValue}`);
             const receipt = await transaction.wait();
 
-            const _contractUrl = 'https://' + etherscanNetwork + "/tx/"+receipt['transactionHash'];
+            const _contractUrl = 'https://' + etherscanNetwork + "/tx/" + receipt['transactionHash'];
             setEtherscanLink(_contractUrl);
 
             console.log(`Minted ${tokens} with ${mintedWith} for a total of ${totalValue}`);
@@ -172,8 +169,7 @@ const Mint = props => {
             setConnected(true);
 
             console.log("Connect wallet");
-        }
-        catch (err) {
+        } catch (err) {
             let errToDisplay = "An error occurred!";
             setErrorMessage(errToDisplay);
         }
@@ -181,8 +177,27 @@ const Mint = props => {
     }
 
     return (
-        <div className={styles.main}>
-            <style jsx global>{`
+        <div>
+            <div className="headertop">
+                <div className="logo"><a href="https://confusedheroes.com" target="_blank" rel="noreferrer"> <img
+                    src="/img/chlogo.png"
+                    alt="Confused Heroes"
+                    width="60"/></a></div>
+
+                <div className="social">
+                    <a href="https://www.instagram.com/confusedheroesnft/" target="_blank" rel="noreferrer"> <i
+                        className="fab fa-instagram"/></a>
+
+                    <a href="https://twitter.com/ConfusedHeroes" target="_blank" rel="noreferrer"> <i
+                        className="fab fa-twitter"/></a>
+
+                    <a href="https://discord.gg/confusedheroes" target="_blank" rel="noreferrer"><i
+                        className="fab fa-discord"/></a>
+                </div>
+
+            </div>
+            <div className={styles.main}>
+                <style jsx global>{`
         html {
   background: url(img/bgmint2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -191,39 +206,40 @@ const Mint = props => {
   background-size: cover;
 }
       `}</style>
-            <img src="img/logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
-            <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
-            <br/>
-            <div className={styles.under} style={{fontSize: "22px"}}>MINTED {props.totalSupply}</div>
-            <br/>
-            <div className={styles.under}></div>
-            {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/> }
-            <br/>
-            {
-                successMessage ?
-                <ChSuccessTransactionForm
-                    totalValue={totalValue}
-                    tokens={tokens}
-                    etherscanLink = {etherscanLink}
-                ></ChSuccessTransactionForm> :
-                <ChMintForm
-                    saleMessage={saleMessage}
-                    totalValue={totalValue}
-                    tokens={tokens}
-                    decreaseTokens={decreaseTokens}
-                    increaseTokens={increaseTokens}
-                    onSubmit={onSubmit}
-                    totalSupply={props.totalSupply}
-                    maxSupply={props.maxSupply}
-                    loading={loading}
-                    connected={connected}
-                    onConnect={onConnect}
-                    account={account}
-                ></ChMintForm>
-            }
+                <img src="img/logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
+                <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
+                <br/>
+                <div className={styles.under} style={{fontSize: "22px"}}>MINTED {props.totalSupply}</div>
+                <br/>
+                <div className={styles.under}></div>
+                {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
+                <br/>
+                {
+                    successMessage ?
+                        <ChSuccessTransactionForm
+                            totalValue={totalValue}
+                            tokens={tokens}
+                            etherscanLink={etherscanLink}
+                        ></ChSuccessTransactionForm> :
+                        <ChMintForm
+                            saleMessage={saleMessage}
+                            totalValue={totalValue}
+                            tokens={tokens}
+                            decreaseTokens={decreaseTokens}
+                            increaseTokens={increaseTokens}
+                            onSubmit={onSubmit}
+                            totalSupply={props.totalSupply}
+                            maxSupply={props.maxSupply}
+                            loading={loading}
+                            connected={connected}
+                            onConnect={onConnect}
+                            account={account}
+                        ></ChMintForm>
+                }
 
-            <br/>
+                <br/>
 
+            </div>
         </div>
     )
 }
