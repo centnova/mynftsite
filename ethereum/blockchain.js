@@ -1,4 +1,4 @@
-const chain = "rinkeby";
+const chain = "mainnet";
 
 const contracts = {
     "rinkeby": "0x27e4bf65cb4449880e5368d077078bb3d996d6d0",
