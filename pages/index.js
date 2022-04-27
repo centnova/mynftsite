@@ -131,13 +131,20 @@ const Mint = props => {
             setSuccessMessage(true);
 
         } catch (err) {
-            let errToDisplay = "An error occurred!";
-            if (err.message.includes("invalid Merkle proof")) {
-                errToDisplay = "Invalid Merkle Proof. You are not in the Whitelist!";
-            }
-
-            setErrorMessage(errToDisplay);
             console.log(err.message);
+            console.log(err.code);
+
+            let errorToSet = err.code;
+
+            if (err.code) {
+                if (err.code == '4001') {
+                    errorToSet = 'You rejected the transaction.'
+                }
+            }
+            else {
+                errorToSet ='An unknown error occurred!';
+            }
+            setErrorMessage(errorToSet);
         }
         setLoading(false);
     };
@@ -169,7 +176,6 @@ const Mint = props => {
 
             console.log("Connect wallet");
         } catch (err) {
-            let errToDisplay = "An error occurred!";
             setErrorMessage(err.message);
         }
         setLoading(false);
