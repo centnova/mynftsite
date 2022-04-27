@@ -1,8 +1,6 @@
 import Document, {Html, Head, Main, NextScript} from 'next/document'
 import React from "react";
 
-const title = "MINT CONFUSED HEROES"
-
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
         const initialProps = await Document.getInitialProps(ctx)
@@ -13,8 +11,17 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>{title}</title>
                     <link rel="shortcut icon" href="/favicon.png"/>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                    <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
+                    <meta name="author" content="CONFUSED HEROES"/>
+                    <meta name="description" content="CONFUSED HEROES"/>
+                    <link rel="icon" type="image/png" href="/favicon.png"/>
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+                    <title>MINT CONFUSED HEROES</title>
+                    <link href="plugins.css" rel="stylesheet"/>
+                    <link href="minting.css" rel="stylesheet"/>
                 </Head>
                 <body>
                 <Main/>
