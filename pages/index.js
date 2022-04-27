@@ -185,13 +185,13 @@ const Mint = props => {
                     width="60"/></a></div>
 
                 <div className={styles.social}>
-                    <a href="https://www.instagram.com/confusedheroesnft/" target="_blank" rel="noreferrer"> <i
+                    <a href="https://www.instagram.com/confusedheroesnft/" target="_blank" rel="noreferrer"><i
                         className="fab fa-instagram"/></a>
 
-                    <a href="https://twitter.com/ConfusedHeroes" target="_blank" rel="noreferrer"> <i
+                    &nbsp;<a href="https://twitter.com/ConfusedHeroes" target="_blank" rel="noreferrer"><i
                         className="fab fa-twitter"/></a>
 
-                    <a href="https://discord.gg/confusedheroes" target="_blank" rel="noreferrer"><i
+                    &nbsp;<a href="https://discord.gg/confusedheroes" target="_blank" rel="noreferrer"><i
                         className="fab fa-discord"/></a>
                 </div>
 
