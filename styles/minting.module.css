@@ -27,6 +27,17 @@ MINT CONFUSED HEROES
 }
 
 
+.logo {
+    float: left;
+    margin: 8px;
+}
+
+.social {
+    float: right;
+    margin: 8px;
+}
+
+
 .main {
     width: 100%;
     margin: auto;
