@@ -170,7 +170,7 @@ const Mint = props => {
             console.log("Connect wallet");
         } catch (err) {
             let errToDisplay = "An error occurred!";
-            setErrorMessage(errToDisplay);
+            setErrorMessage(err.message);
         }
         setLoading(false);
     }
