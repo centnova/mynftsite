@@ -206,14 +206,12 @@ const Mint = props => {
   background-size: cover;
 }
       `}</style>
-                <img src="img/logomain.png" alt="Confused Heroes" width="240"/> <br/> <br/>
+                <img src="img/logomain.png" alt="Confused Heroes" width="240"/>
                 <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
-                <br/>
                 <div className={styles.under} style={{fontSize: "22px"}}>MINTED {props.totalSupply}</div>
                 <br/>
                 <div className={styles.under}></div>
                 {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
-                <br/>
                 {
                     successMessage ?
                         <ChSuccessTransactionForm
