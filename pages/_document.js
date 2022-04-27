@@ -12,14 +12,11 @@ class MyDocument extends Document {
             <Html>
                 <Head>
                     <link rel="shortcut icon" href="/favicon.png"/>
-
-                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     <meta httpEquiv="content-type" content="text/html; charset=utf-8"/>
                     <meta name="author" content="CONFUSED HEROES"/>
                     <meta name="description" content="CONFUSED HEROES"/>
                     <link rel="icon" type="image/png" href="/favicon.png"/>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-                    <title>MINT CONFUSED HEROES</title>
                     <link href="css/plugins.css" rel="stylesheet"/>
                 </Head>
                 <body>
