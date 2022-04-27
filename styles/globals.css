@@ -1,10 +1,9 @@
 a {
-color: #fff; }
+    color: #fff;
+}
 
 .headertop {
-width: 100%;
-font-size: 32px;
- display: inline-block;
-
-
+    width: 100%;
+    font-size: 32px;
+    display: inline-block;
 }
