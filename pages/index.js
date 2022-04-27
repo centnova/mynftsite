@@ -210,7 +210,7 @@ const Mint = props => {
                 <div className={styles.heads}>MINT CONFUSED HEROES <br/></div>
                 <div className={styles.under} style={{fontSize: "22px"}}>MINTED {props.totalSupply}</div>
                 <br/>
-                <div className={styles.under}></div>
+                <div className={styles.under}/>
                 {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
                 {
                     successMessage ?
@@ -218,7 +218,7 @@ const Mint = props => {
                             totalValue={totalValue}
                             tokens={tokens}
                             etherscanLink={etherscanLink}
-                        ></ChSuccessTransactionForm> :
+                        /> :
                         <ChMintForm
                             saleMessage={saleMessage}
                             totalValue={totalValue}
@@ -232,7 +232,7 @@ const Mint = props => {
                             connected={connected}
                             onConnect={onConnect}
                             account={account}
-                        ></ChMintForm>
+                        />
                 }
 
                 <br/>
