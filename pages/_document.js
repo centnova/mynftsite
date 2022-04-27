@@ -20,8 +20,7 @@ class MyDocument extends Document {
                     <link rel="icon" type="image/png" href="/favicon.png"/>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                     <title>MINT CONFUSED HEROES</title>
-                    <link href="plugins.css" rel="stylesheet"/>
-                    <link href="minting.css" rel="stylesheet"/>
+                    <link href="css/plugins.css" rel="stylesheet"/>
                 </Head>
                 <body>
                 <Main/>
