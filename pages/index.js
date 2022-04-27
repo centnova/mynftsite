@@ -176,7 +176,14 @@ const Mint = props => {
 
             console.log("Connect wallet");
         } catch (err) {
-            setErrorMessage(err.message);
+            console.log(err);
+            if (err instanceof Error) {
+                setErrorMessage("Please install Metamask.");
+            }
+            else {
+                setErrorMessage(err.message);
+            }
+
         }
         setLoading(false);
     }
@@ -215,7 +222,8 @@ const Mint = props => {
                 <div className={styles.heads}>MINT<br/>CONFUSED HEROES<br/></div>
                 <div className={styles.under} style={{fontSize: "22px"}}><br/>MINTED {props.totalSupply}</div>
                 <br/>
-                {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
+                {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div>: <br/>}
+                <br/>
                 {
                     successMessage ?
                         <ChSuccessTransactionForm
