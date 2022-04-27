@@ -13,7 +13,6 @@ export default function ChSuccessTransactionForm(ctx) {
 
     return (
         <form action="">
-            <br/>
             <div className={styles.under}>Congratulations! You have successfully minted {tokens} {tokens > 1 &&
             <span>{nftName} NFTs</span> ||
             <span>{nftName} NFT</span>} for {totalValue} ETH
