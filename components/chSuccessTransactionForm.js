@@ -19,7 +19,7 @@ export default function ChSuccessTransactionForm(ctx) {
             </div>
             <br/><br/>
             <span style={{"fontSize": "0.9rem"}}><a href={etherscanLink} target="_blank" rel="noreferrer">Check your transaction in etherscan</a></span>
-            <br/><br/><br/>
+            <br/><br/><br/><br/>
             <button className={styles.mintme} type="submit">MINT MORE</button>
         </form>
     );
