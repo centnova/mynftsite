@@ -7,6 +7,7 @@ import ChMintForm from "../components/chMintForm";
 import ChSuccessTransactionForm from "../components/chSuccessTransactionForm";
 import merklelist from "../lib/merkle_whitelist.js";
 import {etherscanNetwork} from "../ethereum/blockchain";
+import Image from 'next/image'
 
 
 const Mint = props => {
@@ -140,9 +141,8 @@ const Mint = props => {
                 if (err.code == '4001') {
                     errorToSet = 'You rejected the transaction.'
                 }
-            }
-            else {
-                errorToSet ='An unknown error occurred!';
+            } else {
+                errorToSet = 'An unknown error occurred!';
             }
             setErrorMessage(errorToSet);
         }
@@ -179,8 +179,7 @@ const Mint = props => {
             console.log(err);
             if (err instanceof Error) {
                 setErrorMessage("Please install Metamask.");
-            }
-            else {
+            } else {
                 setErrorMessage(err.message);
             }
 
@@ -191,20 +190,24 @@ const Mint = props => {
     return (
         <div>
             <div className="headertop">
-                <div className={styles.logo}><a href="https://confusedheroes.com" target="_blank" rel="noreferrer"> <img
-                    src="/img/chlogo.png"
-                    alt="Confused Heroes"
-                    width="60"/></a></div>
+                <div className={styles.logo}><a href="https://confusedheroes.com" target="_blank" rel="noreferrer">
+                    <Image
+                        src="/img/chlogo.png"
+                        alt="Confused Heroes"
+                        width={60}
+                        height={60}
+                    />
+                </a></div>
 
                 <div className={styles.social}>
                     <a href="https://www.instagram.com/confusedheroesnft/" target="_blank" rel="noreferrer"><i
                         className="fab fa-instagram"/></a>
 
                     &nbsp;<a href="https://twitter.com/ConfusedHeroes" target="_blank" rel="noreferrer"><i
-                        className="fab fa-twitter"/></a>
+                    className="fab fa-twitter"/></a>
 
                     &nbsp;<a href="https://discord.gg/confusedheroes" target="_blank" rel="noreferrer"><i
-                        className="fab fa-discord"/></a>
+                    className="fab fa-discord"/></a>
                 </div>
 
             </div>
@@ -218,10 +221,15 @@ const Mint = props => {
   background-size: cover;
 }
       `}</style>
-                <img src="img/logomain.png" alt="Confused Heroes" width="240"/>
+                <Image
+                    src="/img/logomain.png"
+                    alt="Confused Heroes"
+                    width={240}
+                    height={139}
+                />
                 <div className={styles.heads}>MINT<br/>CONFUSED HEROES<br/></div>
                 <br/>
-                {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div>: <br/>}
+                {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
                 <br/>
                 {
                     successMessage ?
