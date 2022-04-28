@@ -228,6 +228,7 @@ const Mint = props => {
                     height={139}
                 />
                 <div className={styles.heads}>MINT<br/>CONFUSED HEROES<br/></div>
+                <div className={styles.under} style={{fontSize: "22px"}}><br/>MINTED {props.totalSupply}/2500<sup>*</sup></div>
                 <br/>
                 {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
                 <br/>
