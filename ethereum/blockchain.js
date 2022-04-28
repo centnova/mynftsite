@@ -17,9 +17,16 @@ const providerUrlsAllChains =
         ]
     };
 
+const etherscanLinks = {
+    "rinkeby": "rinkeby.etherscan.io",
+    "mainnet": "etherscan.io"
+};
+
 console.log(`We are connected to ${chain}`);
 
 const providerUrls = providerUrlsAllChains[chain.toLowerCase()];
 const contractAddress = contracts[chain.toLowerCase()]
+const etherscanNetwork = etherscanLinks[chain.toLowerCase()];
 
-export {contractAddress, providerUrls};
+console.log(`Etherscan Link ${etherscanNetwork}`)
+export {contractAddress, providerUrls, etherscanNetwork};

@@ -6,6 +6,8 @@ import {ethers} from "ethers";
 import ChMintForm from "../components/chMintForm";
 import ChSuccessTransactionForm from "../components/chSuccessTransactionForm";
 import merklelist from "../lib/merkle_whitelist.js";
+import {etherscanNetwork} from "../ethereum/blockchain";
+
 
 const Mint = props => {
     const [tokens, setTokens] = useState(1);
@@ -18,8 +20,6 @@ const Mint = props => {
     const [provider, setProvider] = useState(null);
     const [account, setAccount] = useState('');
     const [chainName, setChainName] = useState('');
-
-    const etherscanNetwork = "rinkeby.etherscan.io";
 
     // const whitelistMint = false;
 
