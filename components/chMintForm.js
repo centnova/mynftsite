@@ -48,7 +48,7 @@ export default function ChMintForm(ctx) {
                     undefined
             }
             <br/><br/><br/><br/><br/>
-            <div className={styles.under}><sup>*</sup>2500 to unlock 100% of the Roadmap</div>
+            <div className={styles.under}><sup>*</sup>to unlock 100% of the Roadmap</div>
             <br/><br/>
 
             <div className={styles.under}
