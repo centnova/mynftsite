@@ -42,7 +42,7 @@ export default function ChMintForm(ctx) {
                 connected
                     ?
                     <div>
-                        <div className={styles.under}>Connected Wallet:<br/>{account}</div>
+                        <div className={styles.under}><div className={styles.wrapWallet}>Connected Wallet:<br/>{account}</div></div>
                     </div>
                     :
                     undefined

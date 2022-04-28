@@ -198,6 +198,10 @@ MINT CONFUSED HEROES
     font-family: "MonumentExtended-Heavy";
 }
 
+.wrapWallet {
+    overflow-wrap: anywhere;
+}
+
 
 
 
