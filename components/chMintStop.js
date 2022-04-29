@@ -20,7 +20,7 @@ export default function ChMintStop(ctx) {
 
     return (
         <div className={loading ? styles.isdisabled : ""}>
-            <div className={styles.under}>The Sale Has Stopped.</div>
+            <div className={styles.heads}>The Sale Is Closed.</div>
             <br/>
 
             <br/>
