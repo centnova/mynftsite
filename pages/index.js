@@ -5,6 +5,7 @@ import contract from "../ethereum/_contract";
 import {ethers} from "ethers";
 import ChMintForm from "../components/chMintForm";
 import ChSuccessTransactionForm from "../components/chSuccessTransactionForm";
+import ChMintStop from "../components/chMintStop";
 import merklelist from "../lib/merkle_whitelist.js";
 import {etherscanNetwork} from "../ethereum/blockchain";
 import Image from 'next/image'
@@ -228,31 +229,11 @@ const Mint = props => {
                     height={139}
                 />
                 <div className={styles.heads}>MINT<br/>CONFUSED HEROES<br/></div>
-                <div className={styles.under} style={{fontSize: "22px"}}><br/>MINTED {props.totalSupply}/888<sup>*</sup></div>
                 <br/>
                 {errorMessage ? <div className={styles.errorclass}>{errorMessage} </div> : <br/>}
                 <br/>
                 {
-                    successMessage ?
-                        <ChSuccessTransactionForm
-                            totalValue={totalValue}
-                            tokens={tokens}
-                            etherscanLink={etherscanLink}
-                        /> :
-                        <ChMintForm
-                            saleMessage={saleMessage}
-                            totalValue={totalValue}
-                            tokens={tokens}
-                            decreaseTokens={decreaseTokens}
-                            increaseTokens={increaseTokens}
-                            onSubmit={onSubmit}
-                            totalSupply={props.totalSupply}
-                            maxSupply={props.maxSupply}
-                            loading={loading}
-                            connected={connected}
-                            onConnect={onConnect}
-                            account={account}
-                        />
+                    <ChMintStop></ChMintStop>
                 }
 
                 <br/>
